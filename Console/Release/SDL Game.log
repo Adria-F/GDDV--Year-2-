@@ -1,0 +1,47 @@
+﻿  Application.cpp
+d:\rma\path finder\Animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+  Globals.cpp
+  Main.cpp
+  ModuleAudio.cpp
+  ModuleCollision.cpp
+d:\rma\path finder\Animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+  ModuleFadeToBlack.cpp
+  ModuleFonts.cpp
+  ModuleInput.cpp
+d:\rma\path finder\Animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+D:\Programes\Microsoft Visual Studio 2015\VC\include\xlocale(341): warning C4530: C++ exception handler used, but unwind semantics are not enabled. Specify /EHsc
+D:\Programes\Microsoft Visual Studio 2015\VC\include\exception(359): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
+  ModuleParticles.cpp
+d:\rma\path finder\Animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+ModuleParticles.cpp(72): warning C4060: switch statement contains no 'case' or 'default' labels
+ModuleParticles.cpp(102): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+ModuleParticles.cpp(103): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+ModuleParticles.cpp(108): warning C4060: switch statement contains no 'case' or 'default' labels
+ModuleParticles.cpp(162): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+ModuleParticles.cpp(165): warning C4018: '>': signed/unsigned mismatch
+  ModulePathFinding.cpp
+ModulePathFinding.cpp(210): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+ModulePathFinding.cpp(211): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+ModulePathFinding.cpp(212): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+  ModulePlayer.cpp
+d:\rma\path finder\Animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+ModulePlayer.cpp(79): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+ModulePlayer.cpp(80): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+ModulePlayer.cpp(81): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ModulePlayer.cpp(86): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+ModulePlayer.cpp(87): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+ModulePlayer.cpp(102): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  ModulePushBacks.cpp
+  ModuleRender.cpp
+  ModuleTextures.cpp
+  ModuleUI.cpp
+d:\rma\path finder\Animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+  ModuleWelcomeTitle.cpp
+d:\rma\path finder\Animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+ModuleWelcomeTitle.cpp(88): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  ModuleWindow.cpp
+  Generating code
+  All 164 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  SDL Game.vcxproj -> D:\rma\Path Finder\Release\Path Finder.exe
+  SDL Game.vcxproj -> D:\rma\Path Finder\Release\Path Finder.pdb (Full PDB)

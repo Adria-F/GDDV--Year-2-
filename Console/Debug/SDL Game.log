@@ -1,0 +1,8 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (GunBird - Coded Dreams.vcxproj, Path Finder.vcxproj, Unnamed - Summer Project.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  ModuleChat.cpp
+d:\rma\console\modulechat.cpp(22): warning C4129: '^': unrecognized character escape sequence
+d:\rma\console\modulechat.cpp(26): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+d:\rma\console\modulechat.cpp(93): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+d:\rma\console\modulechat.cpp(100): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+  SDL Game.vcxproj -> D:\rma\Console\Debug\Console.exe
+  SDL Game.vcxproj -> D:\rma\Console\Debug\Console.pdb (Full PDB)
