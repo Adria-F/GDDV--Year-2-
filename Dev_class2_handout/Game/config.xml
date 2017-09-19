@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<config>
+  <name>That's the game name</name>
+  <window>
+    <fullscreen value="false"/>
+  </window>
+</config>
