@@ -1,0 +1,7 @@
+﻿  ModulePhysics.cpp
+d:\rma\gddv--year-2-\physics2_class1_handout\modulephysics.cpp(55): warning C4305: '=': truncation from 'double' to 'float32'
+d:\rma\gddv--year-2-\physics2_class1_handout\modulephysics.cpp(63): warning C4305: 'argument': truncation from 'double' to 'float32'
+d:\rma\gddv--year-2-\physics2_class1_handout\modulephysics.cpp(67): warning C4305: 'argument': truncation from 'double' to 'float32'
+d:\programes\microsoft visual studio 2015\vc\include\cmath(131): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
+  SDL Game.vcxproj -> D:\rma\GDDV--Year-2-\Physics2_class1_handout\Debug\Physics 2 Class 1 Handout.exe
+  SDL Game.vcxproj -> D:\rma\GDDV--Year-2-\Physics2_class1_handout\Debug\Physics 2 Class 1 Handout.pdb (Full PDB)
