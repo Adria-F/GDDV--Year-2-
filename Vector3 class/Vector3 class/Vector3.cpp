@@ -1,97 +1,97 @@
 #include "Vector3.h"
 #include <math.h>
 
-Vector3 Vector3::operator+(const Vector3 other) const
+Vector3 Vector3::operator+(const Vector3& other) const
 {
-	return Vector3(this->x + other.x, this->y + other.y, this->z + other.z);
+	return Vector3(x + other.x, y + other.y, z + other.z);
 }
 
-Vector3 Vector3::operator-(const Vector3 other) const
+Vector3 Vector3::operator-(const Vector3& other) const
 {
-	return Vector3(this->x - other.x, this->y - other.y, this->z - other.z);
+	return Vector3(x - other.x, y - other.y, z - other.z);
 }
 
 Vector3 Vector3::operator*(float num) const
 {
-	return Vector3(this->x * num, this->y * num, this->z * num);
+	return Vector3(x * num, y * num, z * num);
 }
 
 Vector3 Vector3::operator/(float num) const
 {
-	return Vector3(this->x / num, this->y / num, this->z / num);
+	return Vector3(x / num, y / num, z / num);
 }
 
-Vector3 Vector3::operator+=(const Vector3 other)
+Vector3 Vector3::operator+=(const Vector3& other)
 {
-	this->x += other.x;
-	this->y += other.y;
-	this->z += other.z;
+	x += other.x;
+	y += other.y;
+	z += other.z;
 
 	return *this;
 }
 
-Vector3 Vector3::operator-=(const Vector3 other)
+Vector3 Vector3::operator-=(const Vector3& other)
 {
-	this->x -= other.x;
-	this->y -= other.y;
-	this->z -= other.z;
+	x -= other.x;
+	y -= other.y;
+	z -= other.z;
 
 	return *this;
 }
 
 Vector3 Vector3::operator*=(float num)
 {
-	this->x *= num;
-	this->y *= num;
-	this->z *= num;
+	x *= num;
+	y *= num;
+	z *= num;
 
 	return *this;
 }
 
 Vector3 Vector3::operator/=(float num)
 {
-	this->x /= num;
-	this->y /= num;
-	this->z /= num;
+	x /= num;
+	y /= num;
+	z /= num;
 
 	return *this;
 }
 
-bool Vector3::operator==(const Vector3 other) const
+bool Vector3::operator==(const Vector3& other) const
 {
-	return (this->x == other.x && this->y == other.y && this->z == other.z);
+	return (x == other.x && y == other.y && z == other.z);
 }
 
-bool Vector3::operator!=(const Vector3 other) const
+bool Vector3::operator!=(const Vector3& other) const
 {
-	return (this->x != other.x || this->y != other.y || this->z != other.z);
+	return (x != other.x || y != other.y || z != other.z);
 }
 
 float Vector3::module() const
 {
-	return sqrt(pow(this->x, 2.0) + pow(this->y, 2.0) + pow(this->z, 2.0));
+	return sqrt(pow(x, 2.0) + pow(y, 2.0) + pow(z, 2.0));
 }
 
 void Vector3::normalize()
 {
-	*this /= this->module();
+	*this /= sqrt(pow(x, 2.0) + pow(y, 2.0) + pow(z, 2.0));
 }
 
 void Vector3::zero()
 {	
-	this->x = 0;
-	this->y = 0;
-	this->z = 0;
+	x = 0;
+	y = 0;
+	z = 0;
 }
 
 bool Vector3::isZero() const
 {
-	return (this->x == 0 && this->y == 0 && this->z == 0);
+	return (x == 0 && y == 0 && z == 0);
 }
 
-float Vector3::distanceTo(Vector3 other) const
+float Vector3::distanceTo(const Vector3& other) const
 {
 	Vector3 distance = *this - other;
 
-	return distance.module();
+	return sqrt(pow(distance.x, 2.0) + pow(distance.y, 2.0) + pow(distance.z, 2.0));
 }

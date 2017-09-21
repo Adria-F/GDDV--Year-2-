@@ -1,3 +1,10 @@
-﻿  main.cpp
-  Vector3 class.vcxproj -> D:\rma\Vector3 class\Debug\Vector3 class.exe
-  Vector3 class.vcxproj -> D:\rma\Vector3 class\Debug\Vector3 class.pdb (Partial PDB)
+﻿  Vector3.cpp
+c:\users\adriafc\documents\gddv-year-2-\vector3 class\vector3 class\vector3.cpp(72): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+c:\users\adriafc\documents\gddv-year-2-\vector3 class\vector3 class\vector3.cpp(77): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\adriafc\documents\gddv-year-2-\vector3 class\vector3 class\vector3.cpp(96): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+  Compiling...
+  main.cpp
+  Generating Code...
+  Vector3 class.vcxproj -> C:\Users\adriafc\Documents\GDDV-Year-2-\Vector3 class\Debug\Vector3 class.exe
+  Vector3 class.vcxproj -> C:\Users\adriafc\Documents\GDDV-Year-2-\Vector3 class\Debug\Vector3 class.pdb (Partial PDB)
