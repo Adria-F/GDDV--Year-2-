@@ -173,16 +173,30 @@ bool j1Audio::PlayFx(unsigned int id, int repeat)
 	return ret;
 }
 
+void j1Audio::setVolume(int volume)
+{
+	if (volume > MIX_MAX_VOLUME)
+		volume = MIX_MAX_VOLUME;
+	else if (volume < 0)
+		volume = 0;
+	Mix_VolumeMusic(volume);
+}
+
+int j1Audio::getVolume() const
+{
+	return Mix_VolumeMusic(-1);
+}
+
 bool j1Audio::Load(pugi::xml_node& node)
 {
-
+	Mix_VolumeMusic(node.attribute("volume").as_int());
 
 	return true;
 }
 
 bool j1Audio::Save(pugi::xml_node& node) const
 {
-	node.append_attribute("volume").set_value(50);
+	node.append_attribute("volume").set_value(Mix_VolumeMusic(-1));
 
 	return true;
 }

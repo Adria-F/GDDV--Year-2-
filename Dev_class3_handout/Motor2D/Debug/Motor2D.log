@@ -1,8 +1,4 @@
-﻿  j1Render.cpp
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  j1Textures.cpp
-  j1Scene.cpp
-  j1App.cpp
-  Motor2D.vcxproj -> C:\Users\adriafc\Desktop\Dev_class2_handout\Debug\Motor 2D.exe
-  Motor2D.vcxproj -> C:\Users\adriafc\Desktop\Dev_class2_handout\Debug\Motor 2D.pdb (Full PDB)
+﻿  j1Audio.cpp
+  LINK : C:\Users\adriafc\Desktop\GDDV-Year-2-\Dev_class3_handout\Debug\Motor 2D.exe not found or not built by the last incremental link; performing full link
+  Motor2D.vcxproj -> C:\Users\adriafc\Desktop\GDDV-Year-2-\Dev_class3_handout\Debug\Motor 2D.exe
+  Motor2D.vcxproj -> C:\Users\adriafc\Desktop\GDDV-Year-2-\Dev_class3_handout\Debug\Motor 2D.pdb (Full PDB)
