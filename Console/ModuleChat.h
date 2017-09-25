@@ -4,6 +4,8 @@
 #include "Module.h"
 #include "ModuleCollision.h"
 #include "ModuleTextures.h"
+#include <iostream>
+using namespace std;
 
 enum textType
 {
@@ -15,8 +17,7 @@ struct message
 {
 	//int font_score = -1;
 	int line_Y;
-	int length = 0;
-	char* text; //*
+	string text; //*
 	textType type;
 };
 

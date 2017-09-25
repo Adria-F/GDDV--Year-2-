@@ -1,47 +1,43 @@
-﻿  Application.cpp
-d:\rma\path finder\Animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Release\) contains files shared from another project (Path Finder.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Application.cpp
+d:\rma\gddv--year-2-\console\Animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
   Globals.cpp
   Main.cpp
   ModuleAudio.cpp
+  ModuleChat.cpp
+ModuleChat.cpp(22): warning C4129: '^': unrecognized character escape sequence
+ModuleChat.cpp(26): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+ModuleChat.cpp(93): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+ModuleChat.cpp(100): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
   ModuleCollision.cpp
-d:\rma\path finder\Animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+d:\rma\gddv--year-2-\console\Animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
   ModuleFadeToBlack.cpp
   ModuleFonts.cpp
   ModuleInput.cpp
-d:\rma\path finder\Animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+d:\rma\gddv--year-2-\console\Animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
 D:\Programes\Microsoft Visual Studio 2015\VC\include\xlocale(341): warning C4530: C++ exception handler used, but unwind semantics are not enabled. Specify /EHsc
 D:\Programes\Microsoft Visual Studio 2015\VC\include\exception(359): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
   ModuleParticles.cpp
-d:\rma\path finder\Animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+d:\rma\gddv--year-2-\console\Animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
 ModuleParticles.cpp(72): warning C4060: switch statement contains no 'case' or 'default' labels
 ModuleParticles.cpp(102): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 ModuleParticles.cpp(103): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 ModuleParticles.cpp(108): warning C4060: switch statement contains no 'case' or 'default' labels
 ModuleParticles.cpp(162): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 ModuleParticles.cpp(165): warning C4018: '>': signed/unsigned mismatch
-  ModulePathFinding.cpp
-ModulePathFinding.cpp(210): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-ModulePathFinding.cpp(211): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-ModulePathFinding.cpp(212): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
   ModulePlayer.cpp
-d:\rma\path finder\Animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-ModulePlayer.cpp(79): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-ModulePlayer.cpp(80): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-ModulePlayer.cpp(81): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-ModulePlayer.cpp(86): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-ModulePlayer.cpp(87): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-ModulePlayer.cpp(102): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+d:\rma\gddv--year-2-\console\Animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+ModulePlayer.cpp(79): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   ModulePushBacks.cpp
   ModuleRender.cpp
   ModuleTextures.cpp
   ModuleUI.cpp
-d:\rma\path finder\Animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+d:\rma\gddv--year-2-\console\Animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
   ModuleWelcomeTitle.cpp
-d:\rma\path finder\Animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-ModuleWelcomeTitle.cpp(88): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+d:\rma\gddv--year-2-\console\Animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
   ModuleWindow.cpp
   Generating code
-  All 164 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  All 155 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
-  SDL Game.vcxproj -> D:\rma\Path Finder\Release\Path Finder.exe
-  SDL Game.vcxproj -> D:\rma\Path Finder\Release\Path Finder.pdb (Full PDB)
+  SDL Game.vcxproj -> D:\rma\GDDV--Year-2-\Console\Release\Console.exe
+  SDL Game.vcxproj -> D:\rma\GDDV--Year-2-\Console\Release\Console.pdb (Full PDB)

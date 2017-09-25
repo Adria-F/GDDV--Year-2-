@@ -4,6 +4,8 @@
 #include "ModuleFonts.h"
 #include "ModuleInput.h"
 #include "SDL/include/SDL_timer.h"
+#include "SDL/include/SDL_keycode.h"
+#include "SDL/include/SDL_keyboard.h"
 
 Chat::Chat()
 {
@@ -20,8 +22,6 @@ bool Chat::Start()
 	box_height = 50;
 	box_margin = 1;
 	font_score = App->fonts->Load("assets/UI/font.png", "!º#$%&'()*+,-./:;<=>0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@?[]abcdefghijklmnopqrstuvwxyz{|}~`\^_¿      ", 10);
-	chat.Text.text = nullptr;
-	chat.Text.length = 0;
 	chat.cursor_pos = 0;
 	cursor_start = SDL_GetTicks();
 	cursor = true;
@@ -35,16 +35,74 @@ update_status Chat::Update()
 	App->render->DrawQuad({ box_margin, SCREEN_HEIGHT - box_height + box_margin, SCREEN_WIDTH - (2 * box_margin), box_height - (2 * box_margin) }, 0, 0, 0, 255);
 
 	int mayus = 0;
+	bool cap_lock = false;
 
-	for (int i = 4; i < 30; i++)
+	int temp = SDL_GetModState();
+	temp = temp & KMOD_CAPS;
+	if (temp == KMOD_CAPS)
+		cap_lock = true;
+
+	for (int i = 30; i < 40; i++) //0-9
 	{
 		if (App->input->keyboard[i] == KEY_DOWN)
 		{
-			if (App->input->keyboard[SDL_SCANCODE_LSHIFT] == KEY_REPEAT)
-				mayus = 32;
+			mayus = 0;
+			if (i == 39)
+				mayus = 10;
+			if (App->input->keyboard[SDL_SCANCODE_LSHIFT] == KEY_REPEAT && ((i >= 30 && i <= 38))) //symbols
+			{
+				mayus = 16;
+				if (i == 31)
+					mayus = 11;
+				if (i == 36)
+					mayus = 8;
+			}
+			addChar(i + 19 - mayus, chat.Text);
+		}
+	}
+
+	for (int i = 4; i < 30; i++) //a-z
+	{
+		if (App->input->keyboard[i] == KEY_DOWN)
+		{
+			if (App->input->keyboard[SDL_SCANCODE_LSHIFT] == KEY_REPEAT) //A-Z
+				mayus = (cap_lock)? 0 : 32;
 			else
-				mayus = 0;
+				mayus = (cap_lock) ? 32 : 0;
 			addChar(i + 93 - mayus, chat.Text);
+		}
+	}
+
+	//Un-ordered symbols
+	{
+		if (App->input->keyboard[SDL_SCANCODE_KP_PLUS] == KEY_DOWN || App->input->keyboard[48] == KEY_DOWN)
+		{
+			addChar(43, chat.Text);
+		}
+		if (App->input->keyboard[SDL_SCANCODE_KP_MINUS] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_SLASH] == KEY_DOWN)
+		{
+			addChar(45, chat.Text);
+		}
+		if (App->input->keyboard[SDL_SCANCODE_KP_MULTIPLY] == KEY_DOWN)
+		{
+			addChar(42, chat.Text);
+		}
+		if (App->input->keyboard[SDL_SCANCODE_COMMA] == KEY_DOWN)
+		{
+			addChar(44, chat.Text);
+		}
+		if (App->input->keyboard[SDL_SCANCODE_PERIOD] == KEY_DOWN)
+		{
+			addChar(46, chat.Text);
+		}
+		if (App->input->keyboard[84] == KEY_DOWN) // /
+		{
+			addChar(47, chat.Text);
+		}
+		for (int i = 0; i < 150; i++)
+		{
+			if (App->input->keyboard[i] == KEY_DOWN)
+				LOG("KEY PRESSED: %d", i);
 		}
 	}
 
@@ -55,30 +113,19 @@ update_status Chat::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_DOWN && chat.cursor_pos > 0)
 		chat.cursor_pos--;
-	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_DOWN && chat.cursor_pos < chat.Text.length)
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_DOWN && chat.cursor_pos < chat.Text.text.length())
 		chat.cursor_pos++;
 
 	if (App->input->keyboard[SDL_SCANCODE_BACKSPACE] == KEY_DOWN)
 	{
 		if (chat.cursor_pos > 0)
 		{
-			char* tempText = new char[chat.Text.length--];
-			int j = 0;
-			for (int i = 0; i < chat.Text.length; i++)
-			{
-				if (i == chat.cursor_pos - 1)
-					j++;
-
-				tempText[i] = chat.Text.text[j];
-				j++;
-			}
-			chat.Text.text = tempText;
+			chat.Text.text.erase(chat.cursor_pos - 1, 1);
 			chat.cursor_pos--;
 		}
 	}
 
-	if (chat.Text.text != nullptr)
-		App->fonts->BlitText(10, SCREEN_HEIGHT - box_height + box_margin + 15, font_score, chat.Text.text);
+	App->fonts->BlitText(10, SCREEN_HEIGHT - box_height + box_margin + 15, font_score, chat.Text.text.c_str());
 
 	cursorBlink();
 
@@ -106,23 +153,14 @@ void Chat::cursorBlink()
 
 void Chat::addChar(int id, message& text)
 {
-	bool overwritten = false;
-	char* tempText = new char[text.length++];
-	int j = 0;
-	for (int i = 0; i < chat.Text.length - 1 + ((overwritten)? 1 : 0); i++)
+	if (chat.cursor_pos != chat.Text.text.length())
 	{
-		if (i == chat.cursor_pos)
-		{
-			tempText[j] = id;
-			j++;
-			overwritten = true;
-		}
-		tempText[j] = text.text[i];
-		j++;
+		chat.Text.text.insert(chat.cursor_pos, 1, id);
 	}
-	if (!overwritten)
-		tempText[chat.Text.length - 1] = id;
-	text.text = tempText;
+	else
+	{
+		chat.Text.text += id;
+	}
 	chat.cursor_pos++;
 }
 
