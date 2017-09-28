@@ -6,6 +6,8 @@
 #include "p2Point.h"
 #include "j1Module.h"
 
+#define MAX_TILESETS 10
+
 // TODO 2: Create a struct to hold information for a TileSet
 // Ignore Terrain Types and Tile Types for now, but we want the image!
 // ----------------------------------------------------
@@ -48,6 +50,7 @@ struct map
 	uint tileWidth;
 	uint tileHeight;
 	int nextObjectId;
+	int tilesets;
 };
 
 // ----------------------------------------------------
@@ -75,12 +78,13 @@ public:
 private:
 
 	bool LoadMap(pugi::xml_node& map);
+	bool LoadTileSet(pugi::xml_node& tileset);
 
 public:
 
 	// TODO 1: Add your struct for map info as public for now
 	map scene1;
-	tileset tileSet;
+	tileset* tileSets[MAX_TILESETS];
 
 private:
 

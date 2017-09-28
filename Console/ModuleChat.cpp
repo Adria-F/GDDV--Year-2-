@@ -116,7 +116,7 @@ update_status Chat::Update()
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_DOWN && chat.cursor_pos < chat.Text.text.length())
 		chat.cursor_pos++;
 
-	if (App->input->keyboard[SDL_SCANCODE_BACKSPACE] == KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_BACKSPACE])
 	{
 		if (chat.cursor_pos > 0)
 		{

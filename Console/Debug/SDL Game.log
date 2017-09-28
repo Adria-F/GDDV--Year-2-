@@ -7,12 +7,5 @@ d:\rma\gddv--year-2-\console\modulechat.cpp(116): warning C4018: '<': signed/uns
 d:\rma\gddv--year-2-\console\modulechat.cpp(140): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
 d:\rma\gddv--year-2-\console\modulechat.cpp(147): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
 d:\programes\microsoft visual studio 2015\vc\include\exception(359): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
-  Generating Code...
-  Compiling...
-  Application.cpp
-d:\rma\gddv--year-2-\console\animation.h(64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-d:\programes\microsoft visual studio 2015\vc\include\xlocale(341): warning C4530: C++ exception handler used, but unwind semantics are not enabled. Specify /EHsc
-d:\programes\microsoft visual studio 2015\vc\include\exception(359): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
-  Generating Code...
   SDL Game.vcxproj -> D:\rma\GDDV--Year-2-\Console\Debug\Console.exe
   SDL Game.vcxproj -> D:\rma\GDDV--Year-2-\Console\Debug\Console.pdb (Full PDB)
