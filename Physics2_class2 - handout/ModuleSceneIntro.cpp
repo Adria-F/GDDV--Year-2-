@@ -82,12 +82,17 @@ update_status ModuleSceneIntro::Update()
 	
 	// TODO 7: Draw all the circles using "circle" texture
 	int x, y;
+	int r;
+	int w, h;
+	float rotation;
 	for (int i = 0; i < MAX_CIRCLES; i++)
 	{
 		if (App->physics->circles[i] != nullptr)
 		{
 			App->physics->circles[i]->getPosition(&x, &y);
-			App->renderer->Blit(circle, x, y);
+			App->physics->circles[i]->getRadius(&r);
+			App->physics->circles[i]->getRotation(&rotation);
+			App->renderer->Blit(circle, x - r, y - r, 0, 1.0f, rotation);
 		}
 	}
 	for (int i = 0; i < MAX_RECTANGLES; i++)
@@ -95,7 +100,9 @@ update_status ModuleSceneIntro::Update()
 		if (App->physics->rectangles[i] != nullptr)
 		{
 			App->physics->rectangles[i]->getPosition(&x, &y);
-			App->renderer->Blit(box, x, y);
+			App->physics->rectangles[i]->getSize(&w, &h);
+			App->physics->rectangles[i]->getRotation(&rotation);
+			App->renderer->Blit(box, x - w, y - h, 0, 1.0f, rotation);
 		}
 	}
 	for (int i = 0; i < MAX_CHAINS; i++)
@@ -103,7 +110,8 @@ update_status ModuleSceneIntro::Update()
 		if (App->physics->chains[i] != nullptr)
 		{
 			App->physics->chains[i]->getPosition(&x, &y);
-			App->renderer->Blit(rick, x, y);
+			App->physics->chains[i]->getRotation(&rotation);
+			App->renderer->Blit(rick, x, y, 0, 1.0f, rotation);
 		}
 	}
 

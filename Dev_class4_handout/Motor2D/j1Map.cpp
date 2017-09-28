@@ -106,7 +106,7 @@ bool j1Map::Load(const char* file_name)
 		// iterate all tilesets and LOG everything
 		LOG("Successfully parsed map XML file: %s", file_name);
 		LOG("width: %d height: %d", scene1.width, scene1.height);
-		LOG("tile_width: %d tile_height: &d", scene1.tileWidth, scene1.tileHeight);
+		LOG("tile_width: %d tile_height: %d", scene1.tileWidth, scene1.tileHeight);
 		for (int i = 0; i < MAX_TILESETS; i++)
 		{
 			if (tileSets[i] != nullptr)
@@ -128,26 +128,10 @@ bool j1Map::LoadMap(pugi::xml_node& map)
 {
 	bool ret = true;
 
-	if (strcmp(map.attribute("orientation").as_string(), "orthogonal"))
-	{
-		scene1.orientation = orthogonal;
-	}
-	else if (map.attribute("orientation").as_string() == "isometric")
-	{
-		scene1.orientation = isometric;
-	}
-	else if (map.attribute("orientation").as_string() == "staggered")
-	{
-		scene1.orientation = staggered;
-	}
-	else if (map.attribute("orientation").as_string() == "hexagonal")
-	{
-		scene1.orientation = hexagonal;
-	}
-	else
+	if (!setOrientation((char*)map.attribute("orientation").as_string()))
 	{
 		LOG("Could not find orientation");
-		//ret = false;
+		ret = false;
 	}
 
 	scene1.width = map.attribute("width").as_uint();
@@ -185,6 +169,34 @@ bool j1Map::LoadTileSet(pugi::xml_node& node)
 			ret = true;
 			break;
 		}
+	}
+
+	return ret;
+}
+
+bool j1Map::setOrientation(char* orientation)
+{
+	bool ret = true;
+
+	if (strcmp(orientation, "orthogonal") == 0)
+	{
+		scene1.orientation = orthogonal;
+	}
+	else if (strcmp(orientation, "isometric") == 0)
+	{
+		scene1.orientation = isometric;
+	}
+	else if (strcmp(orientation, "staggered") == 0)
+	{
+		scene1.orientation = staggered;
+	}
+	else if (strcmp(orientation, "hexagonal") == 0)
+	{
+		scene1.orientation = hexagonal;
+	}
+	else
+	{
+		ret = false;
 	}
 
 	return ret;

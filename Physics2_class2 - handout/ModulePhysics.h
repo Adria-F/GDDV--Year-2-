@@ -40,6 +40,12 @@ public:
 
 	void getPosition(int* x, int* y);
 
+	void getRadius(int* r);
+
+	void getSize(int* w, int* h);
+
+	void getRotation(float* d);
+
 	b2Body* getBody()
 	{
 		return body;

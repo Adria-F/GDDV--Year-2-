@@ -56,6 +56,8 @@ update_status ModulePhysics::PreUpdate()
 {
 	world->Step(1.0f / 60.0f, 6, 2);
 
+	LOG("%d", world->GetBodyCount());
+
 	return UPDATE_CONTINUE;
 }
 
@@ -205,6 +207,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
 	b2CircleShape shape;
 	shape.m_radius = PIXEL_TO_METERS(radius);
 	b2FixtureDef fixture;
+	fixture.density = 1.0f;
 	fixture.shape = &shape;
 
 	b->CreateFixture(&fixture);
@@ -303,4 +306,21 @@ void PhysBody::getPosition(int* x, int* y)
 {
 	*x = METERS_TO_PIXELS(body->GetPosition().x);
 	*y = METERS_TO_PIXELS(body->GetPosition().y);
+}
+
+void PhysBody::getRadius(int* r)
+{
+	*r = METERS_TO_PIXELS(body->GetFixtureList()->GetShape()->m_radius);
+}
+
+void PhysBody::getSize(int* w, int* h)
+{
+	b2PolygonShape* shape = (b2PolygonShape*)body->GetFixtureList()->GetShape();
+	*w = METERS_TO_PIXELS(shape->m_vertices[1].x - shape->m_vertices[0].x);
+	*h = METERS_TO_PIXELS(shape->m_vertices[3].y - shape->m_vertices[0].y);
+}
+
+void PhysBody::getRotation(float* d)
+{
+	*d = body->GetAngle() * RADTODEG;
 }

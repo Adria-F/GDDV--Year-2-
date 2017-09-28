@@ -79,6 +79,7 @@ private:
 
 	bool LoadMap(pugi::xml_node& map);
 	bool LoadTileSet(pugi::xml_node& tileset);
+	bool setOrientation(char* orientation);
 
 public:
 
