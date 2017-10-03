@@ -100,6 +100,16 @@ bool j1Map::Load(const char* file_name)
 		}
 	}
 
+	//Load all layers
+	for (pugi::xml_node layer = map_file.child("map").child("layer"); layer; layer = layer.next_sibling("layer"))
+	{
+		if (!LoadLayer(layer))
+		{
+			LOG("All layers full");
+			ret = false;
+		}
+	}
+
 	if(ret == true)
 	{
 		// TODO 5: LOG all the data loaded
@@ -115,6 +125,15 @@ bool j1Map::Load(const char* file_name)
 				LOG("name: %s firstgid: %d", tileSets[i]->name, tileSets[i]->firstGid);
 				LOG("tile width: %d tile height: %d", tileSets[i]->tileWidth, tileSets[i]->tileHeight);
 				LOG("spacing: %d margin: %d", tileSets[i]->spacing, tileSets[i]->margin);
+			}
+		}
+		for (int i = 0; i < MAX_LAYERS; i++)
+		{
+			if (layers[i] != nullptr)
+			{
+				LOG("Layer ----");
+				LOG("name: %s", layers[i]->name);
+				LOG("layer width: %d layer height: %d", layers[i]->width, layers[i]->height);
 			}
 		}
 	}
@@ -165,6 +184,27 @@ bool j1Map::LoadTileSet(pugi::xml_node& node)
 			tileSets[i]->imgHeight = node.child("image").attribute("height").as_int();
 
 			scene1.tilesets++;
+
+			ret = true;
+			break;
+		}
+	}
+
+	return ret;
+}
+
+bool j1Map::LoadLayer(pugi::xml_node& node)
+{
+	bool ret = false;
+
+	for (int i = 0; i < MAX_LAYERS; i++)
+	{
+		if (layers[i] == nullptr)
+		{
+			layers[i] = new layer;
+			layers[i]->name = (char*)node.attribute("name").as_string();
+			layers[i]->width = node.attribute("width").as_int();
+			layers[i]->height = node.attribute("height").as_int();
 
 			ret = true;
 			break;

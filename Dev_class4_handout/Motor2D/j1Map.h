@@ -7,6 +7,7 @@
 #include "j1Module.h"
 
 #define MAX_TILESETS 10
+#define MAX_LAYERS 10
 
 // TODO 2: Create a struct to hold information for a TileSet
 // Ignore Terrain Types and Tile Types for now, but we want the image!
@@ -23,6 +24,13 @@ struct tileset
 	uint imgWidth;
 	uint imgHeight;
 
+};
+
+struct layer
+{
+	char* name;
+	int width;
+	int height;
 };
 
 enum orientations
@@ -78,7 +86,8 @@ public:
 private:
 
 	bool LoadMap(pugi::xml_node& map);
-	bool LoadTileSet(pugi::xml_node& tileset);
+	bool LoadTileSet(pugi::xml_node& node);
+	bool LoadLayer(pugi::xml_node& node);
 	bool setOrientation(char* orientation);
 
 public:
@@ -86,6 +95,7 @@ public:
 	// TODO 1: Add your struct for map info as public for now
 	map scene1;
 	tileset* tileSets[MAX_TILESETS];
+	layer* layers[MAX_LAYERS];
 
 private:
 
