@@ -38,16 +38,7 @@ struct MapLayer
 struct TileSet
 {
 	// TODO 7: Create a method that receives a tile id and returns it's Rectfind the Rect associated with a specific tile id
-	SDL_Rect GetTileRect(int id) const
-	{
-		int w = tex_width / tile_width;
-		int h = tex_height / tile_height;
-
-		int y = (id / h) - 1;
-		int x = w - (y * h);
-
-		return{ x - 1, y - 1, tile_width, tile_height };
-	}
+	SDL_Rect GetTileRect(int id) const;
 
 	p2SString			name;
 	int					firstgid;

@@ -32,8 +32,8 @@ void j1Map::Draw()
 		return;
 
 	// TODO 5: Prepare the loop to draw all tilesets + Blit
-	p2List_item<MapLayer*>* item;
-	MapLayer* layer;
+	p2List_item<MapLayer*>* item = nullptr;
+	MapLayer* layer = nullptr;
 	uint tile_id;
 	for (item = data.layers.start; item; item = item->next)
 	{
@@ -45,7 +45,7 @@ void j1Map::Draw()
 				tile_id = layer->tiles[layer->Get(i, j)];
 				if (tile_id != 0)
 				{
-
+					App->render->Blit(data.tilesets.start->data->texture, MapToWorld(i, j).x, MapToWorld(i, j).y, &data.tilesets.start->data->GetTileRect(tile_id));
 				}
 			}
 		}
