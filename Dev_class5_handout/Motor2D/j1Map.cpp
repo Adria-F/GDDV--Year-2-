@@ -35,9 +35,11 @@ void j1Map::Draw()
 	p2List_item<MapLayer*>* item = nullptr;
 	MapLayer* layer = nullptr;
 	uint tile_id;
+	p2List_item<TileSet*>* tileSet = nullptr;
 	for (item = data.layers.start; item; item = item->next)
 	{
 		layer = item->data;
+		
 		for (int j = 0; j < data.height; j++)
 		{
 			for (int i = 0; i < data.width; i++)
@@ -45,7 +47,19 @@ void j1Map::Draw()
 				tile_id = layer->tiles[layer->Get(i, j)];
 				if (tile_id != 0)
 				{
-					App->render->Blit(data.tilesets.start->data->texture, MapToWorld(i, j).x, MapToWorld(i, j).y, &data.tilesets.start->data->GetTileRect(tile_id));
+					for (tileSet = data.tilesets.start; tileSet; tileSet = tileSet->next)
+					{
+						if (tile_id >= tileSet->data->firstgid)
+						{
+							tile_id -= (tileSet->data->firstgid  - 1);
+							break;
+						}
+					}
+					
+					SDL_Texture* texture = tileSet->data->texture;
+					iPoint position = MapToWorld(i, j);
+					SDL_Rect* section = &tileSet->data->GetTileRect(tile_id);
+					App->render->Blit(texture, position.x, position.y, section);
 				}
 			}
 		}
