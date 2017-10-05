@@ -74,8 +74,7 @@ public:
 
 	// TODO 5: Create a OnCollision method that receives both PhysBodies
 
-	virtual bool OnColision(PhysBody* b1, PhysBody* b2)
+	virtual void OnColision(PhysBody* b)
 	{
-		return true;
 	}
 };

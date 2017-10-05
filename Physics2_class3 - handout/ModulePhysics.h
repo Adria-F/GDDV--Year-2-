@@ -46,7 +46,7 @@ public:
 	bool CleanUp();
 
 	void BeginContact(b2Contact* contact);
-	bool OnColision(PhysBody* b1, PhysBody* b2);
+	void OnColision(PhysBody* b);
 
 	PhysBody* CreateCircle(int x, int y, int radius);
 	PhysBody* CreateRectangle(int x, int y, int width, int height);

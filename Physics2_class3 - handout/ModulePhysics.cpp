@@ -87,7 +87,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
 	PhysBody* pbody = new PhysBody();
 	pbody->body = b;
 	pbody->width = pbody->height = radius;
-	pbody->callback = this;
+	pbody->callback = (Module*)App->scene_intro;
 	b->SetUserData(pbody);
 
 	return pbody;
@@ -318,20 +318,15 @@ void ModulePhysics::BeginContact(b2Contact* contact)
 	PhysBody* pB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
 
 	if (pA)
-		pA->callback->OnColision(pA, pB);
+		pA->callback->OnColision(pA);
 	if (pB)
-		pB->callback->OnColision(pB, pA);
+		pB->callback->OnColision(pB);
 
 }
 
-bool ModulePhysics::OnColision(PhysBody* b1, PhysBody* b2)
+void ModulePhysics::OnColision(PhysBody* b)
 {
-	bool ret = true;
-
 	LOG("OnCollision");
-	
-
-	return ret;
 }
 
 // TODO 7: Call the listeners that are not NULL
