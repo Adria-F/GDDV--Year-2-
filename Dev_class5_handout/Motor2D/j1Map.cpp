@@ -49,9 +49,8 @@ void j1Map::Draw()
 				{
 					for (tileSet = data.tilesets.start; tileSet; tileSet = tileSet->next)
 					{
-						if (tile_id >= tileSet->data->firstgid)
+						if (tile_id >= tileSet->data->firstgid && ((!tileSet->next) || (tileSet->next && tile_id < tileSet->next->data->firstgid)))
 						{
-							tile_id -= (tileSet->data->firstgid  - 1);
 							break;
 						}
 					}
