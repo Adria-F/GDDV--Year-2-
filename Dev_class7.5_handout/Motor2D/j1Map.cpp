@@ -55,6 +55,7 @@ void j1Map::PropagateBFS()
 			{
 				frontier.Push(neighbor->data);
 				visited.add(neighbor->data);
+				visited.start->next->prev;
 			}
 		}
 	}

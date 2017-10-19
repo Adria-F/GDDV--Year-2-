@@ -1,0 +1,6 @@
+﻿  j1Map.cpp
+c:\users\adriafc\desktop\dev_class7.8_handout\motor2d\j1map.cpp(83): warning C4018: '<': no coinciden signed/unsigned
+c:\users\adriafc\desktop\dev_class7.8_handout\motor2d\j1map.cpp(263): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\adriafc\desktop\dev_class7.8_handout\motor2d\j1map.cpp(264): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Motor2D.vcxproj -> C:\Users\adriafc\Desktop\Dev_class7.8_handout\Debug\Dev Class7.8 Handout.exe
+  Motor2D.vcxproj -> C:\Users\adriafc\Desktop\Dev_class7.8_handout\Debug\Dev Class7.8 Handout.pdb (Partial PDB)
