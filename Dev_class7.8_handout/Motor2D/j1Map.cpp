@@ -82,12 +82,15 @@ void j1Map::PropagateDijkstra()
 			int newCost = MovementCost(neighbors[i].x, neighbors[i].y);
 			if (cost_so_far[neighbors[i].x][neighbors[i].y] == NULL || newCost < cost_so_far[neighbors[i].x][neighbors[i].y])
 			{
-				if (visited.find(neighbors[i]) == -1)
+				if (MovementCost(neighbors[i].x, neighbors[i].y) >= 0)
 				{
-					breadcrumbs.add(curr);
-					frontier.Push(neighbors[i], newCost);
-					visited.add(neighbors[i]);
-				}			   			
+					if (visited.find(neighbors[i]) == -1)
+					{
+						breadcrumbs.add(curr);
+						frontier.Push(neighbors[i], newCost);
+						visited.add(neighbors[i]);
+					}
+				}
 			}
 		}
 	}
