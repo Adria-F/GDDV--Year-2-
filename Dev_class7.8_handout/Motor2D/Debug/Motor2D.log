@@ -1,6 +1,8 @@
 ﻿  j1Map.cpp
-d:\rma\gddv--year-2-\dev_class7.8_handout\motor2d\j1map.cpp(83): warning C4018: '<': signed/unsigned mismatch
-d:\rma\gddv--year-2-\dev_class7.8_handout\motor2d\j1map.cpp(267): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-d:\rma\gddv--year-2-\dev_class7.8_handout\motor2d\j1map.cpp(268): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Motor2D.vcxproj -> D:\rma\GDDV--Year-2-\Dev_class7.8_handout\Debug\Dev Class7.8 Handout.exe
-  Motor2D.vcxproj -> D:\rma\GDDV--Year-2-\Dev_class7.8_handout\Debug\Dev Class7.8 Handout.pdb (Partial PDB)
+c:\users\adriafc\desktop\gddv-year-2-\dev_class7.8_handout\motor2d\j1map.cpp(85): warning C4018: '<': no coinciden signed/unsigned
+c:\users\adriafc\desktop\gddv-year-2-\dev_class7.8_handout\motor2d\j1map.cpp(122): warning C4244: 'inicializando': conversión de 'double' a 'int'; posible pérdida de datos
+c:\users\adriafc\desktop\gddv-year-2-\dev_class7.8_handout\motor2d\j1map.cpp(124): warning C4018: '<': no coinciden signed/unsigned
+c:\users\adriafc\desktop\gddv-year-2-\dev_class7.8_handout\motor2d\j1map.cpp(310): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\adriafc\desktop\gddv-year-2-\dev_class7.8_handout\motor2d\j1map.cpp(311): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Motor2D.vcxproj -> C:\Users\adriafc\Desktop\GDDV-Year-2-\Dev_class7.8_handout\Debug\Dev Class7.8 Handout.exe
+  Motor2D.vcxproj -> C:\Users\adriafc\Desktop\GDDV-Year-2-\Dev_class7.8_handout\Debug\Dev Class7.8 Handout.pdb (Partial PDB)
