@@ -104,9 +104,9 @@ void j1Map::PropagateDijkstra()
 	}
 }
 
-void j1Map::PropagateAStar()
+void j1Map::PropagateAStar(int distanceId)
 {
-	if (visited.end->data != objective)
+	if (visited.find(objective) == -1)
 	{
 		iPoint curr;
 		if (frontier.Pop(curr))
@@ -119,18 +119,35 @@ void j1Map::PropagateAStar()
 
 			for (uint i = 0; i < 4; ++i)
 			{
-				int distance = sqrt(pow(objective.x - curr.x, 1.0) + pow(objective.y - curr.y, 2.0));
-				int newCost = cost_so_far[curr.x][curr.y] + MovementCost(neighbors[i].x, neighbors[i].y) + abs(distance);
+				int distance;
+				switch (distanceId)
+				{
+				case 1:
+					distance = abs(neighbors[i].x - objective.x) + abs(neighbors[i].y - objective.y);
+					break;
+				case 2:
+					distance = pow(neighbors[i].x - objective.x, 2.0) + pow(neighbors[i].y - objective.y, 2.0);
+					break;
+				case 3:
+					distance = sqrt(pow(neighbors[i].x - objective.x, 2.0) + pow(neighbors[i].y - objective.y, 2.0));
+					break;
+				}
+
+				int newCost = cost_so_far[curr.x][curr.y] + MovementCost(neighbors[i].x, neighbors[i].y);
 				if (cost_so_far[neighbors[i].x][neighbors[i].y] == NULL || newCost < cost_so_far[neighbors[i].x][neighbors[i].y])
 				{
-					if (MovementCost(neighbors[i].x, neighbors[i].y) >= 0)
+					if (MovementCost(neighbors[i].x, neighbors[i].y) > 0)
 					{
 						cost_so_far[neighbors[i].x][neighbors[i].y] = newCost;
-						frontier.Push(neighbors[i], newCost);
+						
 						if (visited.find(neighbors[i]) == -1)
 						{
 							breadcrumbs.add(curr);
 							visited.add(neighbors[i]);
+							if (neighbors[i] != objective)
+							{
+								frontier.Push(neighbors[i], newCost + (distance * 10));
+							}
 						}
 						else
 						{

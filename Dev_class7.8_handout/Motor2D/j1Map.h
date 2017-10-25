@@ -136,7 +136,8 @@ public:
 	// Propagation style
 	void PropagateBFS();
 	void PropagateDijkstra();
-	void PropagateAStar();
+	// 1: Manhattan | 2: Euclidean(nosqrt) | 3: Euclidean
+	void PropagateAStar(int distanceId);
 
 private:
 

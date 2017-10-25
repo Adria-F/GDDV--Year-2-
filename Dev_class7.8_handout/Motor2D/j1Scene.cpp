@@ -77,7 +77,11 @@ bool j1Scene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT)
 		App->map->PropagateDijkstra();
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-		App->map->PropagateAStar();
+		App->map->PropagateAStar(1);
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+		App->map->PropagateAStar(2);
+	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+		App->map->PropagateAStar(3);
 
 	if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
 	{
@@ -99,7 +103,7 @@ bool j1Scene::Update(float dt)
 	int x, y;
 	App->input->GetMousePosition(x, y);
 	iPoint map_coordinates = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y);
-	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Tile:%d,%d",
+	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Tile:%d,%d | PRESS RIGHT CLICK + (1: Manhattan / 2: Euclidean(no sqrt) / 3: Euclidean)",
 					App->map->data.width, App->map->data.height,
 					App->map->data.tile_width, App->map->data.tile_height,
 					App->map->data.tilesets.count(),

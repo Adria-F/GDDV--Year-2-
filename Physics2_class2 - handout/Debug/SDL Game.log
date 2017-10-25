@@ -1,7 +1,0 @@
-﻿  ModulePhysics.cpp
-d:\rma\gddv--year-2-\physics2_class2 - handout\box2d\box2d\common\b2math.h(54): warning C4099: 'b2Vec2': type name first seen using 'class' now seen using 'struct'
-  d:\rma\gddv--year-2-\physics2_class2 - handout\box2d\box2d\common\b2math.h(53): note: see declaration of 'b2Vec2'
-d:\rma\gddv--year-2-\physics2_class2 - handout\modulephysics.cpp(35): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\programes\microsoft visual studio 2015\vc\include\cmath(131): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
-  SDL Game.vcxproj -> D:\rma\GDDV--Year-2-\Physics2_class2 - handout\Debug\2D Physics - class 2.exe
-  SDL Game.vcxproj -> D:\rma\GDDV--Year-2-\Physics2_class2 - handout\Debug\2D Physics - class 2.pdb (Full PDB)
