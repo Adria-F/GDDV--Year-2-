@@ -43,10 +43,12 @@ update_status ModuleCamera3D::Update()
 	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT)
 	{
 		Position += vec3(0, CAMERA_SPEED, 0);
+		Reference += vec3(0, CAMERA_SPEED, 0);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)
 	{
 		Position -= vec3(0, CAMERA_SPEED, 0);
+		Reference -= vec3(0, CAMERA_SPEED, 0);;
 	}
 
 	// TODO 4: Make the camera go forward (w) and backward with (s)
@@ -54,12 +56,12 @@ update_status ModuleCamera3D::Update()
 	// you can read them to modify Position
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
-		
+		Reference -= CAMERA_SPEED*Z;
 		Position -= CAMERA_SPEED*Z;
 	}
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
-
+		Reference += CAMERA_SPEED*Z;
 		Position += CAMERA_SPEED*Z;
 	}
 
@@ -68,12 +70,12 @@ update_status ModuleCamera3D::Update()
 	// you can read them to modify Position
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
-
+		Reference -= CAMERA_SPEED*X;
 		Position -= CAMERA_SPEED*X;
 	}
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
-
+		Reference += CAMERA_SPEED*X;
 		Position += CAMERA_SPEED*X;
 	}
 	
@@ -83,19 +85,40 @@ update_status ModuleCamera3D::Update()
 		int dx = -App->input->GetMouseXMotion();
 		int dy = -App->input->GetMouseYMotion();
 
-		float Dx = dx *0.1f;
-		float Dy = dy* 0.1f;
-
 		// TODO (Homework): Rotate the camera with the mouse
-		float distance = sqrt(pow(Position.x - Reference.x, 2.0) + pow(Position.y - Reference.y, 2.0));
-		 
-		//dx increment angle X
-		//dy increment angle Y
+		// Rotation over reference
+		float distance = sqrt(pow(Position.x - Reference.x, 2.0) + pow(Position.y - Reference.y, 2.0) + pow(Position.z - Reference.z, 2.0));
+		float angleV = atan((Position.y - Reference.y) / (Position.z - Reference.z));
+		float angleH = atan((Position.x - Reference.x) / (Position.z - Reference.z));
 
-		Position += {(float)dx, (float)-dy, 0};
+		angleV -= dy/10;
+		angleH -= dx/10;
+
+		if (angleV > 90)
+			angleV = 90;
+		if (angleV < -90)
+			angleV = -90;
+
+		if (angleH > 90)
+			angleH = 90;
+		if (angleH < -90)
+			angleH = -90;
+		
+		vec3 newPos;
+		newPos.x = sin(angleH);
+		newPos.y = sin(angleV);
+		newPos.z = cos(angleV);
+		newPos *= distance;
+
+		Position = newPos;
 		LookAt(Reference);
 
-		//LookAt({ Reference.x - Dx, Reference.y + Dy, 0 });
+		// Rotation over camera
+		/*float Dx = dx *0.1f;
+		float Dy = dy* 0.1f;
+
+		if (Dx != 0 || Dy != 0)
+			LookAt({ Reference.x - Dx, Reference.y + Dy, 0 });*/
 	}
 
 	// Recalculate matrix -------------
