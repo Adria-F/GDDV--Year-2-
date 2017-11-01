@@ -14,6 +14,7 @@
 #include "j1Map.h"
 #include "j1Pathfinding.h"
 #include "j1App.h"
+#include "j1PerfTimer.h"
 
 // TODO 3: Measure the amount of ms that takes to execute:
 // App constructor, Awake, Start and CleanUp
@@ -22,6 +23,7 @@
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 {
+	timer = new j1PerfTimer();
 	input = new j1Input();
 	win = new j1Window();
 	render = new j1Render();
@@ -45,6 +47,8 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 
 	// render last to swap buffer
 	AddModule(render);
+
+	LOG("App Constructor time: %f", timer->ReadMs());
 }
 
 // Destructor
@@ -100,6 +104,7 @@ bool j1App::Awake()
 		}
 	}
 
+	LOG("App Awake time: %f", timer->ReadMs());
 	return ret;
 }
 
@@ -115,6 +120,8 @@ bool j1App::Start()
 		ret = item->data->Start();
 		item = item->next;
 	}
+
+	LOG("App Start time: %f", timer->ReadMs());
 	return ret;
 }
 
@@ -179,12 +186,12 @@ void j1App::FinishUpdate()
 	// Amount of ms took the last update
 	// Amount of frames during the last second
 
-	float avg_fps = 0.0f;
-	float seconds_since_startup = 0.0f;
+	float avg_fps = timer->ReadTicks()/timer->ReadMs();
+	float seconds_since_startup = timer->ReadMs()*1000;
 	float dt = 0.0f;
 	uint32 last_frame_ms = 0;
 	uint32 frames_on_last_update = 0;
-	uint64 frame_count = 0;
+	uint64 frame_count = timer->ReadTicks();
 
 	static char title[256];
 	sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %u Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %lu ",
@@ -270,6 +277,8 @@ bool j1App::CleanUp()
 		ret = item->data->CleanUp();
 		item = item->prev;
 	}
+
+	LOG("App CleanUp time: %f", timer->ReadMs());
 	return ret;
 }
 
