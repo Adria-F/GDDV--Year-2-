@@ -225,11 +225,18 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 				{
 					if (curr_neighbor->data.g < old_instance->data.g)
 					{
-						iPoint old_pos = old_instance->data.pos;
+						// To check the position of these cells
+						/*iPoint old_pos = old_instance->data.pos;
 						iPoint lowest_pos = lowest->data.pos;
-						old_instance->data.parent = &lowest->data;
+						old_instance->data.parent = &lowest->data;*/
+						open.list.del(old_instance);
+						open.list.add(curr_neighbor->data);
 					}
 				}
+			}
+			else
+			{
+				LOG("Node X:%d | Y:%d was on closed list", curr_neighbor->data.pos.x, curr_neighbor->data.pos.y);
 			}
 			curr_neighbor = curr_neighbor->next;
 		}
