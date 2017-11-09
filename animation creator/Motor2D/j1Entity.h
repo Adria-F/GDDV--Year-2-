@@ -32,10 +32,20 @@ class Entity : public j1Module
 {
 public:
 
-	Entity()
+	Entity(const char* name)
 	{
 		v.x = 0;
 		v.y = 0;
+
+		p2SString path("animations/%s.tmx", name);
+		idle_right = LoadAnimation(path.GetString(), "idle_right");
+		idle_left = LoadAnimation(path.GetString(), "idle_left");
+		right = LoadAnimation(path.GetString(), "right");
+		left = LoadAnimation(path.GetString(), "left");
+		jumping_right = LoadAnimation(path.GetString(), "jumping_right");
+		jumping_left = LoadAnimation(path.GetString(), "jumping_left");
+		falling_right = LoadAnimation(path.GetString(), "falling_right");
+		falling_left = LoadAnimation(path.GetString(), "falling_left");
 	}
 
 	bool Entity_Update();

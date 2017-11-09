@@ -1,2 +1,23 @@
-﻿  Motor2D.vcxproj -> D:\rma\GDDV--Year-2-\animation creator\Debug\Motor 2D.exe
-  Motor2D.vcxproj -> D:\rma\GDDV--Year-2-\animation creator\Debug\Motor 2D.pdb (Partial PDB)
+﻿  j1Player.cpp
+c:\users\adriafc\desktop\gddv-year-2-\animation creator\motor2d\j1collision.h(20): warning C4099: 'Collider': type name first seen using 'class' now seen using 'struct'
+  c:\users\adriafc\desktop\gddv-year-2-\animation creator\motor2d\j1collision.h(19): note: see declaration of 'Collider'
+c:\users\adriafc\desktop\gddv-year-2-\animation creator\motor2d\animation.h(7): warning C4099: 'SDL_Texture': type name first seen using 'struct' now seen using 'class'
+  c:\users\adriafc\desktop\gddv-year-2-\animation creator\motor2d\sdl\include\sdl_render.h(128): note: see declaration of 'SDL_Texture'
+c:\users\adriafc\desktop\gddv-year-2-\animation creator\motor2d\j1player.cpp(80): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adriafc\desktop\gddv-year-2-\animation creator\motor2d\j1player.cpp(81): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adriafc\desktop\gddv-year-2-\animation creator\motor2d\j1player.cpp(188): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\adriafc\desktop\gddv-year-2-\animation creator\motor2d\j1player.cpp(207): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\adriafc\desktop\gddv-year-2-\animation creator\motor2d\j1player.cpp(208): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\adriafc\desktop\gddv-year-2-\animation creator\motor2d\j1player.cpp(256): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adriafc\desktop\gddv-year-2-\animation creator\motor2d\j1player.cpp(257): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adriafc\desktop\gddv-year-2-\animation creator\motor2d\j1player.cpp(265): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  j1Scene.cpp
+  j1Map.cpp
+  j1Input.cpp
+  j1Entity.cpp
+  j1Collision.cpp
+  j1App.cpp
+  Motor2D.vcxproj -> C:\Users\adriafc\Desktop\GDDV-Year-2-\animation creator\Debug\Motor 2D.exe
+  Motor2D.vcxproj -> C:\Users\adriafc\Desktop\GDDV-Year-2-\animation creator\Debug\Motor 2D.pdb (Partial PDB)
