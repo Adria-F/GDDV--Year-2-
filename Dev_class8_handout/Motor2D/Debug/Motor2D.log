@@ -1,8 +1,0 @@
-﻿  j1Pathfinding.cpp
-d:\rma\gddv--year-2-\dev_class8_handout\motor2d\p2point.h(114): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  d:\rma\gddv--year-2-\dev_class8_handout\motor2d\p2point.h(110): note: while compiling class template member function 'int p2Point<int>::DistanceTo(const p2Point<int> &) const'
-  d:\rma\gddv--year-2-\dev_class8_handout\motor2d\j1pathfinding.cpp(160): note: see reference to function template instantiation 'int p2Point<int>::DistanceTo(const p2Point<int> &) const' being compiled
-  d:\rma\gddv--year-2-\dev_class8_handout\motor2d\j1pathfinding.h(81): note: see reference to class template instantiation 'p2Point<int>' being compiled
-d:\rma\gddv--year-2-\dev_class8_handout\motor2d\p2point.h(114): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-  Motor2D.vcxproj -> D:\rma\GDDV--Year-2-\Dev_class8_handout\Debug\Development - Class 8 Handout.exe
-  Motor2D.vcxproj -> D:\rma\GDDV--Year-2-\Dev_class8_handout\Debug\Development - Class 8 Handout.pdb (Partial PDB)
