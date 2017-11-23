@@ -32,16 +32,36 @@ bool j1Scene::Awake()
 
 // Called before the first frame
 bool j1Scene::Start()
-{
-	// TODO 3: Create the banner (rect {485, 829, 328, 103}) and the text "Hello World"
-	SDL_Rect section;
-	section.x = 485;
-	section.y = 829;
-	section.w = 328;
-	section.h = 103;
-	banner = App->gui->createImageFromAtlas(330, 100, {485, 829, 328, 103});
-	text = App->gui->createText("Hello World", 460, 75, App->font->default);
-	App->gui->createImage(100, 100, App->tex->Load("maps/meta2.png"));
+{	
+	App->gui->createImage(0, 0, App->tex->Load("textures/login_background.png")); //Background Image
+	App->gui->createImageFromAtlas(10, 10, { 230, 19, 179, 80 }); //Wow Logo
+	App->gui->createImageFromAtlas(430, 470, { 39, 32, 66, 43 }); //Blizzard Logo
+	App->gui->createImageFromAtlas(25, 450, { 9, 109, 128, 40 }); //Notice Image
+
+	//Buttons ---temp---
+	App->gui->createImageFromAtlas(400, 375, { 13, 188, 129, 25 }); //Login
+	App->gui->createImageFromAtlas(25, 350, { 13, 188, 129, 25 }); //Manage Account
+	App->gui->createImageFromAtlas(25, 385, { 13, 188, 129, 25 }); //Community Site
+	App->gui->createImageFromAtlas(18, 425, { 19, 266, 18, 17 }); //Checkbox
+	App->gui->createImageFromAtlas(810, 348, { 13, 188, 129, 25 }); //Terms of Use
+	App->gui->createImageFromAtlas(810, 315, { 13, 188, 129, 25 }); //Credits
+	App->gui->createImageFromAtlas(810, 280, { 13, 188, 129, 25 }); //Cinematics
+	App->gui->createImageFromAtlas(810, 475, { 13, 188, 129, 25 }); //Quit
+
+	//Input boxes
+	App->gui->createImageFromAtlas(402, 320, { 311, 228, 128, 20 }); //Account Password
+	App->gui->createImageFromAtlas(402, 260, { 311, 228, 128, 20 }); //Account Name
+
+	//Texts
+	SDL_Color text_color = { 255, 255, 0, 255 };
+	_TTF_Font* text_font = App->font->Load("fonts/wow/ARIALN.ttf");
+	App->gui->createText("Remember Account Name", 45, 425, text_font, text_color);
+	App->gui->createText("Version 2.0.12 (6546) (Release)", 10, 498, text_font, text_color);
+	App->gui->createText("Mar 30 2007", 10, 516, text_font, text_color);
+	App->gui->createText("Copyright 2004-2007  Blizzard Entertainment. All Rights Reserved.", 275, 516, text_font, text_color);
+	App->gui->createText("Account Password", 412, 300, text_font, text_color);
+	App->gui->createText("Account Name", 425, 240, text_font, text_color);
+	App->gui->createText("WoWops.org TBC", 840, 385, text_font, {100, 100, 100, 255});
 
 	return true;
 }

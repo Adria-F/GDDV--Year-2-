@@ -120,7 +120,7 @@ void j1Gui::blitImages()
 {
 	for (p2List_item<Image*>* item = images.start; item; item = item->next)
 	{
-		App->render->Blit(item->data->texture, item->data->position.x, item->data->position.y, item->data->section, false);
+		App->render->Blit(item->data->texture, item->data->position.x, item->data->position.y, (item->data->section), false);
 	}
 }
 
