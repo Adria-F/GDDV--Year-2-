@@ -93,7 +93,20 @@ Text* j1Gui::createText(char* text, int x, int y, _TTF_Font* font, SDL_Color col
 Image* j1Gui::createImage(int x, int y, SDL_Rect* section, SDL_Texture* texture)
 {
 	SDL_Texture* usingTexture = (texture) ? texture : atlas;
-	Image* ret = new Image(usingTexture, x, y, *section);
+	SDL_Rect rect;
+	if (section == NULL)
+	{
+		uint width, height;
+		App->tex->GetSize(texture, width, height);
+		rect.x = 0;
+		rect.y = 0;
+		rect.w = width;
+		rect.h = height;
+	}
+	else
+		rect = *section;
+
+	Image* ret = new Image(usingTexture, x, y, rect);
 	images.add(ret);
 	
 	return ret;
