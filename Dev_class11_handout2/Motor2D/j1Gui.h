@@ -34,14 +34,14 @@ struct Image
 	Image()
 	{}
 
-	Image(SDL_Texture* texture, int x, int y, SDL_Rect section): texture(texture), position({x, y}), section(section)
+	Image(SDL_Texture* texture, int x, int y, SDL_Rect* section): texture(texture), position({x, y}), section(section)
 	{}
 
 	~Image();
 
 	iPoint position;
 	SDL_Texture* texture = nullptr;
-	SDL_Rect section;
+	SDL_Rect* section = nullptr;
 };
 
 
@@ -75,7 +75,8 @@ public:
 
 	const SDL_Texture* GetAtlas() const;
 	Text* createText(char* text, int x, int y, _TTF_Font* font, SDL_Color color = { 255, 255, 255, 255 });
-	Image* createImage(int x, int y, SDL_Rect* section = NULL, SDL_Texture* texture = NULL);
+	Image* createImage(int x, int y, SDL_Texture* texture);
+	Image* createImageFromAtlas(int x, int y, SDL_Rect section);
 
 private:
 

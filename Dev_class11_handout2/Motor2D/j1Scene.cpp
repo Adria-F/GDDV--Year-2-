@@ -33,27 +33,15 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-	if(App->map->Load("iso_walk.tmx") == true)
-	{
-		int w, h;
-		uchar* data = NULL;
-		if(App->map->CreateWalkabilityMap(w, h, &data))
-			App->pathfinding->SetMap(w, h, data);
-
-		RELEASE_ARRAY(data);
-	}
-
-	debug_tex = App->tex->Load("maps/path2.png");
-
 	// TODO 3: Create the banner (rect {485, 829, 328, 103}) and the text "Hello World"
 	SDL_Rect section;
 	section.x = 485;
 	section.y = 829;
 	section.w = 328;
 	section.h = 103;
-	banner = App->gui->createImage(330, 100, &section);
+	banner = App->gui->createImageFromAtlas(330, 100, {485, 829, 328, 103});
 	text = App->gui->createText("Hello World", 460, 75, App->font->default);
-	App->gui->createImage(100, 100, NULL, App->tex->Load("maps/meta2.png"));
+	App->gui->createImage(100, 100, App->tex->Load("maps/meta2.png"));
 
 	return true;
 }

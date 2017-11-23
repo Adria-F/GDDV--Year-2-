@@ -90,25 +90,20 @@ Text* j1Gui::createText(char* text, int x, int y, _TTF_Font* font, SDL_Color col
 	return ret;
 }
 
-Image* j1Gui::createImage(int x, int y, SDL_Rect* section, SDL_Texture* texture)
+Image* j1Gui::createImage(int x, int y, SDL_Texture* texture)
 {
-	SDL_Texture* usingTexture = (texture) ? texture : atlas;
-	SDL_Rect rect;
-	if (section == NULL)
-	{
-		uint width, height;
-		App->tex->GetSize(texture, width, height);
-		rect.x = 0;
-		rect.y = 0;
-		rect.w = width;
-		rect.h = height;
-	}
-	else
-		rect = *section;
-
-	Image* ret = new Image(usingTexture, x, y, rect);
+	Image* ret = new Image(texture, x, y, NULL);
 	images.add(ret);
 	
+	return ret;
+}
+
+Image* j1Gui::createImageFromAtlas(int x, int y, SDL_Rect section)
+{
+	SDL_Rect* rect = new SDL_Rect(section);
+	Image* ret = new Image(atlas, x, y, rect);
+	images.add(ret);
+
 	return ret;
 }
 
@@ -125,7 +120,7 @@ void j1Gui::blitImages()
 {
 	for (p2List_item<Image*>* item = images.start; item; item = item->next)
 	{
-		App->render->Blit(item->data->texture, item->data->position.x, item->data->position.y, &item->data->section, false);
+		App->render->Blit(item->data->texture, item->data->position.x, item->data->position.y, item->data->section, false);
 	}
 }
 
@@ -151,5 +146,10 @@ Image::~Image()
 	{
 		App->tex->UnLoad(texture);
 		texture = nullptr;
+	}
+	if (section != nullptr)
+	{
+		delete section;
+		section = nullptr;
 	}
 }
