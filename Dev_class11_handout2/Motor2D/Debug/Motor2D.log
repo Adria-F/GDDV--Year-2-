@@ -1,0 +1,24 @@
+﻿  j1Gui.cpp
+  j1App.cpp
+c:\users\adriafc\desktop\dev_class11_handout2\motor2d\j1gui.h(14): warning C4099: 'Text': type name first seen using 'class' now seen using 'struct'
+  c:\users\adriafc\desktop\dev_class11_handout2\motor2d\j1gui.h(13): note: see declaration of 'Text'
+c:\users\adriafc\desktop\dev_class11_handout2\motor2d\j1gui.h(33): warning C4099: 'Image': type name first seen using 'class' now seen using 'struct'
+  c:\users\adriafc\desktop\dev_class11_handout2\motor2d\j1gui.h(32): note: see declaration of 'Image'
+c:\users\adriafc\desktop\dev_class11_handout2\motor2d\j1app.cpp(217): warning C4018: '<': signed/unsigned mismatch
+c:\users\adriafc\desktop\dev_class11_handout2\motor2d\j1app.cpp(213): warning C4477: 'sprintf_s' : format string '%lu' requires an argument of type 'unsigned long', but variadic argument 6 has type 'uint64'
+  c:\users\adriafc\desktop\dev_class11_handout2\motor2d\j1app.cpp(213): note: consider using '%llu' in the format string
+  c:\users\adriafc\desktop\dev_class11_handout2\motor2d\j1app.cpp(213): note: consider using '%I64u' in the format string
+  Generating Code...
+  Compiling...
+  j1Scene.cpp
+c:\users\adriafc\desktop\dev_class11_handout2\motor2d\j1scene.h(7): warning C4099: 'Image': type name first seen using 'struct' now seen using 'class'
+  c:\users\adriafc\desktop\dev_class11_handout2\motor2d\j1gui.h(33): note: see declaration of 'Image'
+c:\users\adriafc\desktop\dev_class11_handout2\motor2d\j1scene.h(8): warning C4099: 'Text': type name first seen using 'struct' now seen using 'class'
+  c:\users\adriafc\desktop\dev_class11_handout2\motor2d\j1gui.h(14): note: see declaration of 'Text'
+c:\users\adriafc\desktop\dev_class11_handout2\motor2d\j1scene.cpp(103): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+c:\users\adriafc\desktop\dev_class11_handout2\motor2d\j1scene.cpp(106): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+c:\users\adriafc\desktop\dev_class11_handout2\motor2d\j1scene.cpp(109): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+c:\users\adriafc\desktop\dev_class11_handout2\motor2d\j1scene.cpp(112): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+  Motor2D.vcxproj -> C:\Users\adriafc\Desktop\Dev_class11_handout2\Debug\Development - Class 11 Handout2.exe
+  Motor2D.vcxproj -> C:\Users\adriafc\Desktop\Dev_class11_handout2\Debug\Development - Class 11 Handout2.pdb (Partial PDB)
