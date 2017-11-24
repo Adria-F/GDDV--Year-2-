@@ -39,7 +39,7 @@ private:
 	SDL_Texture* debug_tex;
 	Button* login_button;
 	Button* manageAccount_button;
-
+	Button* quit_button;
 };
 
 #endif // __j1SCENE_H__

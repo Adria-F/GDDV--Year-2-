@@ -38,8 +38,10 @@ struct Text
 	iPoint position;
 	SDL_Color color;
 	SDL_Texture* texture;
+	SDL_Texture* outline;
 	uint tex_width;
 	uint tex_height;
+	iPoint outline_offset;
 
 	void createTexture();
 };
@@ -64,19 +66,26 @@ struct Button
 	Button()
 	{}
 
-	Button(const Button& button): text(button.text), position(button.position), texture(button.texture), standby(button.standby), OnMouse(button.OnMouse), OnClick(button.OnClick), type(button.type)
-	{}
-
-	Button(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick,  button_type type):
-		position({x, y}),
+	Button(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick, button_type type) :
+		position({ x, y }),
 		texture(texture),
 		standby(standby),
 		OnMouse(OnMouse),
+		Tick(OnMouse),
 		OnClick(OnClick),
 		type(type)
 	{
 		this->text = new Text(text, position.x, position.y, font, color);
 	}
+
+	Button(int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnClick, SDL_Rect Tick, button_type type) :
+		position({ x, y }),
+		texture(texture),
+		standby(standby),
+		Tick(Tick),
+		OnClick(OnClick),
+		type(type)
+	{}
 
 	~Button();
 
@@ -85,12 +94,12 @@ struct Button
 	SDL_Texture* texture = nullptr;
 	SDL_Rect standby;
 	SDL_Rect OnMouse;
+	SDL_Rect Tick;
 	SDL_Rect OnClick;
 	button_state state = STANDBY;
 	button_type type = LINK;
 	bool tick = false;
-
-	bool clicked();
+	bool clicked = false;
 };
 
 // ---------------------------------------------------
@@ -126,8 +135,8 @@ public:
 	Image* createImage(int x, int y, SDL_Texture* texture);
 	Image* createImageFromAtlas(int x, int y, SDL_Rect section);
 	//NULL texture to use atlas
-	Button* createButton(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick, button_type type);
-	Button* createButton(Button* button);
+	Button* createButton(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick);
+	Button* createCheckBox(int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnClick, SDL_Rect Tick);
 
 private:
 
