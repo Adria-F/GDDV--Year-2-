@@ -74,6 +74,15 @@ bool j1Gui::CleanUp()
 	}
 	images.clear();
 
+	p2List_item<Image*>* Bitem;
+	Bitem = images.start;
+	while (Bitem != NULL)
+	{
+		RELEASE(Bitem->data);
+		Bitem = Bitem->next;
+	}
+	buttons.clear();
+
 	return true;
 }
 
@@ -149,7 +158,9 @@ void j1Gui::blitButtons()
 	{
 		App->render->Blit(item->data->texture, item->data->position.x, item->data->position.y, &item->data->standby, false);
 		item->data->text->createTexture();
-		App->render->Blit(item->data->text->texture, item->data->position.x, item->data->position.y, NULL, false);
+		item->data->text->position.x = item->data->position.x + item->data->standby.w/2 - item->data->text->tex_width/2;
+		item->data->text->position.y = item->data->position.y + item->data->standby.h / 2 - item->data->text->tex_height / 2;
+		App->render->Blit(item->data->text->texture, item->data->text->position.x, item->data->text->position.y, NULL, false);
 	}
 }
 
@@ -167,6 +178,7 @@ Text::~Text()
 void Text::createTexture()
 {
 	texture = App->font->Print(text, color, font);
+	App->tex->GetSize(texture, tex_width, tex_height);
 }
 
 Image::~Image()

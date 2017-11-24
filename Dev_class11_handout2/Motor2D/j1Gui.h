@@ -38,6 +38,8 @@ struct Text
 	iPoint position;
 	SDL_Color color;
 	SDL_Texture* texture;
+	uint tex_width;
+	uint tex_height;
 
 	void createTexture();
 };

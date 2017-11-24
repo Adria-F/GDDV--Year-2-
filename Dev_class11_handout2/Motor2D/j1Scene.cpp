@@ -43,13 +43,13 @@ bool j1Scene::Start()
 
 	//Buttons ---temp---
 	login_button = App->gui->createButton("Login", text_font, text_color, 400, 375, NULL, { 13, 188, 129, 25 }, { 13, 188, 129, 25 }, { 13, 188, 129, 25 }, button_type::LINK);
-	App->gui->createImageFromAtlas(25, 350, { 13, 188, 129, 25 }); //Manage Account
-	App->gui->createImageFromAtlas(25, 385, { 13, 188, 129, 25 }); //Community Site
+	manageAccount_button = App->gui->createButton("Manage Account", text_font, text_color, 25, 350, NULL, { 13, 188, 129, 25 }, { 13, 188, 129, 25 }, { 13, 188, 129, 25 }, button_type::LINK);
+	manageAccount_button = App->gui->createButton("Community Site", text_font, text_color, 25, 385, NULL, { 13, 188, 129, 25 }, { 13, 188, 129, 25 }, { 13, 188, 129, 25 }, button_type::LINK);
 	App->gui->createImageFromAtlas(18, 425, { 19, 266, 18, 17 }); //Checkbox
-	App->gui->createImageFromAtlas(810, 348, { 13, 188, 129, 25 }); //Terms of Use
-	App->gui->createImageFromAtlas(810, 315, { 13, 188, 129, 25 }); //Credits
-	App->gui->createImageFromAtlas(810, 280, { 13, 188, 129, 25 }); //Cinematics
-	App->gui->createImageFromAtlas(810, 475, { 13, 188, 129, 25 }); //Quit
+	manageAccount_button = App->gui->createButton("Terms of Use", text_font, text_color, 810, 348, NULL, { 13, 188, 129, 25 }, { 13, 188, 129, 25 }, { 13, 188, 129, 25 }, button_type::LINK);
+	manageAccount_button = App->gui->createButton("Credits", text_font, text_color, 810, 315, NULL, { 13, 188, 129, 25 }, { 13, 188, 129, 25 }, { 13, 188, 129, 25 }, button_type::LINK);
+	manageAccount_button = App->gui->createButton("Cinematics", text_font, text_color, 810, 280, NULL, { 13, 188, 129, 25 }, { 13, 188, 129, 25 }, { 13, 188, 129, 25 }, button_type::LINK);
+	manageAccount_button = App->gui->createButton("Quit", text_font, text_color, 810, 475, NULL, { 13, 188, 129, 25 }, { 13, 188, 129, 25 }, { 13, 188, 129, 25 }, button_type::LINK);
 
 	//Input boxes
 	App->gui->createImageFromAtlas(402, 320, { 311, 228, 128, 20 }); //Account Password
