@@ -33,13 +33,16 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {	
+	SDL_Color text_color = { 255, 255, 0, 255 };
+	_TTF_Font* text_font = App->font->Load("fonts/wow/ARIALN.ttf");
+
 	App->gui->createImage(0, 0, App->tex->Load("textures/login_background.png")); //Background Image
 	App->gui->createImageFromAtlas(10, 10, { 230, 19, 179, 80 }); //Wow Logo
 	App->gui->createImageFromAtlas(430, 470, { 39, 32, 66, 43 }); //Blizzard Logo
 	App->gui->createImageFromAtlas(25, 450, { 9, 109, 128, 40 }); //Notice Image
 
 	//Buttons ---temp---
-	App->gui->createImageFromAtlas(400, 375, { 13, 188, 129, 25 }); //Login
+	login_button = App->gui->createButton("Login", text_font, text_color, 400, 375, NULL, { 13, 188, 129, 25 }, { 13, 188, 129, 25 }, { 13, 188, 129, 25 }, button_type::LINK);
 	App->gui->createImageFromAtlas(25, 350, { 13, 188, 129, 25 }); //Manage Account
 	App->gui->createImageFromAtlas(25, 385, { 13, 188, 129, 25 }); //Community Site
 	App->gui->createImageFromAtlas(18, 425, { 19, 266, 18, 17 }); //Checkbox
@@ -53,8 +56,6 @@ bool j1Scene::Start()
 	App->gui->createImageFromAtlas(402, 260, { 311, 228, 128, 20 }); //Account Name
 
 	//Texts
-	SDL_Color text_color = { 255, 255, 0, 255 };
-	_TTF_Font* text_font = App->font->Load("fonts/wow/ARIALN.ttf");
 	App->gui->createText("Remember Account Name", 45, 425, text_font, text_color);
 	App->gui->createText("Version 2.0.12 (6546) (Release)", 10, 498, text_font, text_color);
 	App->gui->createText("Mar 30 2007", 10, 516, text_font, text_color);

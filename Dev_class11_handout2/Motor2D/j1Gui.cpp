@@ -46,6 +46,7 @@ bool j1Gui::PostUpdate()
 {
 	blitImages();
 	blitTexts();
+	blitButtons();
 
 	return true;
 }
@@ -107,6 +108,24 @@ Image* j1Gui::createImageFromAtlas(int x, int y, SDL_Rect section)
 	return ret;
 }
 
+Button* j1Gui::createButton(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick, button_type type)
+{
+	SDL_Texture* usingTexture = (texture) ? texture : atlas;
+	
+	Button* ret = new Button(text, font, color, x, y, usingTexture, standby, OnMouse, OnClick, type);
+	buttons.add(ret);
+	
+	return ret;
+}
+
+Button* j1Gui::createButton(Button* button)
+{
+	Button* ret = new Button(*button);
+	buttons.add(ret);
+	
+	return ret;
+}
+
 void j1Gui::blitTexts()
 {
 	for (p2List_item<Text*>* item = texts.start; item; item = item->next)
@@ -120,7 +139,17 @@ void j1Gui::blitImages()
 {
 	for (p2List_item<Image*>* item = images.start; item; item = item->next)
 	{
-		App->render->Blit(item->data->texture, item->data->position.x, item->data->position.y, (item->data->section), false);
+		App->render->Blit(item->data->texture, item->data->position.x, item->data->position.y, item->data->section, false);
+	}
+}
+
+void j1Gui::blitButtons()
+{
+	for (p2List_item<Button*>* item = buttons.start; item; item = item->next)
+	{
+		App->render->Blit(item->data->texture, item->data->position.x, item->data->position.y, &item->data->standby, false);
+		item->data->text->createTexture();
+		App->render->Blit(item->data->text->texture, item->data->position.x, item->data->position.y, NULL, false);
 	}
 }
 
@@ -152,4 +181,23 @@ Image::~Image()
 		delete section;
 		section = nullptr;
 	}
+}
+
+Button::~Button()
+{
+	if (texture != nullptr && texture != App->gui->GetAtlas())
+	{
+		App->tex->UnLoad(texture);
+		texture = nullptr;
+	}
+	if (text != nullptr)
+	{
+		delete text;
+		text = nullptr;
+	}
+}
+
+bool Button::clicked()
+{
+	return false;
 }

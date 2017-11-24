@@ -9,7 +9,20 @@
 struct _TTF_Font;
 struct SDL_Texture;
 
-// TODO 1: Create your structure of classes
+
+enum button_state
+{
+	STANDBY,
+	MOUSEOVER,
+	CLICKED
+};
+
+enum button_type
+{
+	LINK,
+	CHECKBOX
+};
+
 struct Text
 {
 	Text()
@@ -44,6 +57,39 @@ struct Image
 	SDL_Rect* section = nullptr;
 };
 
+struct Button
+{	
+	Button()
+	{}
+
+	Button(const Button& button): text(button.text), position(button.position), texture(button.texture), standby(button.standby), OnMouse(button.OnMouse), OnClick(button.OnClick), type(button.type)
+	{}
+
+	Button(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick,  button_type type):
+		position({x, y}),
+		texture(texture),
+		standby(standby),
+		OnMouse(OnMouse),
+		OnClick(OnClick),
+		type(type)
+	{
+		this->text = new Text(text, position.x, position.y, font, color);
+	}
+
+	~Button();
+
+	Text* text = nullptr;
+	iPoint position;
+	SDL_Texture* texture = nullptr;
+	SDL_Rect standby;
+	SDL_Rect OnMouse;
+	SDL_Rect OnClick;
+	button_state state = STANDBY;
+	button_type type = LINK;
+	bool tick = false;
+
+	bool clicked();
+};
 
 // ---------------------------------------------------
 class j1Gui : public j1Module
@@ -77,11 +123,15 @@ public:
 	Text* createText(char* text, int x, int y, _TTF_Font* font, SDL_Color color = { 255, 255, 255, 255 });
 	Image* createImage(int x, int y, SDL_Texture* texture);
 	Image* createImageFromAtlas(int x, int y, SDL_Rect section);
+	//NULL texture to use atlas
+	Button* createButton(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick, button_type type);
+	Button* createButton(Button* button);
 
 private:
 
 	void blitTexts();
 	void blitImages();
+	void blitButtons();
 
 private:
 
@@ -89,6 +139,7 @@ private:
 	p2SString atlas_file_name;
 	p2List<Text*> texts;
 	p2List<Image*> images;
+	p2List<Button*> buttons;
 };
 
 #endif // __j1GUI_H__
