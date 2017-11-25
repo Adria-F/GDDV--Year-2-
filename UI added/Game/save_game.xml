@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<game_state>
+	<input />
+	<window />
+	<textures />
+	<audio />
+	<:anonymous />
+	<entityManager>
+		<player position_x="1230" position_y="26" level="2" />
+		<player position_x="1230" position_y="31" />
+		<charger position_x="426" position_y="336" />
+		<bat position_x="1931" position_y="110" />
+		<bat position_x="1659" position_y="102" />
+	</entityManager>
+	<map />
+	<scene />
+	<:anonymous />
+	<renderer>
+		<camera x="-1953" y="0" />
+	</renderer>
+</game_state>
