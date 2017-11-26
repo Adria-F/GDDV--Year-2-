@@ -33,7 +33,7 @@ struct Text
 
 	~Text();
 
-	char* text = nullptr;
+	p2SString text = nullptr;
 	_TTF_Font* font = nullptr;
 	iPoint position;
 	SDL_Color color;
@@ -102,6 +102,24 @@ struct Button
 	bool clicked = false;
 };
 
+struct inputText
+{
+	inputText(_TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect section): position({x,y}), texture(texture), box(section)
+	{
+		this->text = new Text("", position.x, position.y, font, color);
+	}
+
+	~inputText();
+
+	Text* text = nullptr;
+	iPoint position;
+	SDL_Texture* texture = nullptr;
+	SDL_Rect box;
+	bool reading = false;
+
+	void readInput();
+};
+
 // ---------------------------------------------------
 class j1Gui : public j1Module
 {
@@ -137,12 +155,14 @@ public:
 	//NULL texture to use atlas
 	Button* createButton(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick);
 	Button* createCheckBox(int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnClick, SDL_Rect Tick);
+	inputText* createInputText(_TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect section);
 
 private:
 
 	void blitTexts();
 	void blitImages();
 	void blitButtons();
+	void blitInputTexts();
 
 private:
 
@@ -151,6 +171,9 @@ private:
 	p2List<Text*> texts;
 	p2List<Image*> images;
 	p2List<Button*> buttons;
+	p2List<inputText*> inputTexts;
+
+	p2SString test;
 };
 
 #endif // __j1GUI_H__

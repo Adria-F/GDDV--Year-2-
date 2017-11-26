@@ -52,8 +52,8 @@ bool j1Scene::Start()
 	quit_button = App->gui->createButton("Quit", text_font, text_color, 810, 475, NULL, { 13, 188, 129, 25 }, { 13, 188, 129, 25 }, { 167, 188, 129, 25 });
 
 	//Input boxes
-	App->gui->createImageFromAtlas(402, 320, { 311, 228, 128, 20 }); //Account Password
-	App->gui->createImageFromAtlas(402, 260, { 311, 228, 128, 20 }); //Account Name
+	App->gui->createInputText(text_font, text_color, 402, 320, NULL, { 311, 228, 128, 20 }); //Account Password
+	App->gui->createInputText(text_font, text_color, 402, 260, NULL, { 311, 228, 128, 20 }); //Account Name
 
 	//Texts
 	App->gui->createText("Remember Account Name", 45, 425, text_font, text_color);

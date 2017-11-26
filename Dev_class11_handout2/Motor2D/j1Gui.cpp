@@ -31,6 +31,7 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 bool j1Gui::Start()
 {
 	atlas = App->tex->Load(atlas_file_name.GetString());
+	SDL_StartTextInput();
 
 	return true;
 }
@@ -42,7 +43,7 @@ bool j1Gui::PreUpdate()
 	{
 		int x, y;
 		App->input->GetMousePosition(x, y);
-		for (p2List_item<Button*>* item = buttons.start; item; item = item->next)
+		for (p2List_item<Button*>* item = buttons.start; item; item = item->next) //Buttons
 		{
 			if (x > item->data->position.x && x < item->data->position.x + item->data->standby.w && y > item->data->position.y && y < item->data->position.y + item->data->standby.h)
 			{
@@ -52,6 +53,17 @@ bool j1Gui::PreUpdate()
 					item->data->tick = !item->data->tick;
 				}
 				break;
+			}
+		}
+		for (p2List_item<inputText*>* item = inputTexts.start; item; item = item->next) //Input Text
+		{
+			if (x > item->data->position.x && x < item->data->position.x + item->data->box.w && y > item->data->position.y && y < item->data->position.y + item->data->box.h)
+			{
+				item->data->reading = true;
+			}
+			else
+			{ 
+				item->data->reading = false;
 			}
 		}
 	}
@@ -67,6 +79,15 @@ bool j1Gui::PreUpdate()
 		}
 	}
 
+	for (p2List_item<inputText*>* item = inputTexts.start; item; item = item->next) //Input Text
+	{
+		if (item->data->reading)
+		{
+			item->data->readInput();
+			break;
+		}
+	}
+
 	return true;
 }
 
@@ -76,6 +97,24 @@ bool j1Gui::PostUpdate()
 	blitImages();
 	blitTexts();
 	blitButtons();
+	blitInputTexts();
+
+
+	SDL_Event e;
+	while (SDL_PollEvent(&e) != 0)
+	{
+		if (e.type == SDL_KEYDOWN)
+		{
+			if (e.key.keysym.sym == SDLK_BACKSPACE && test.Length() > 0)
+			{
+				test.Cut(0, test.Length() - 1);
+			}
+		}
+		else if (e.type == SDL_TEXTINPUT)
+		{
+			test += e.text.text;
+		}
+	}
 
 	return true;
 }
@@ -103,14 +142,23 @@ bool j1Gui::CleanUp()
 	}
 	images.clear();
 
-	p2List_item<Image*>* Bitem;
-	Bitem = images.start;
+	p2List_item<Button*>* Bitem;
+	Bitem = buttons.start;
 	while (Bitem != NULL)
 	{
 		RELEASE(Bitem->data);
 		Bitem = Bitem->next;
 	}
 	buttons.clear();
+
+	p2List_item<inputText*>* Initem;
+	Initem = inputTexts.start;
+	while (Initem != NULL)
+	{
+		RELEASE(Initem->data);
+		Initem = Initem->next;
+	}
+	inputTexts.clear();
 
 	return true;
 }
@@ -152,6 +200,16 @@ Button * j1Gui::createCheckBox(int x, int y, SDL_Texture * texture, SDL_Rect sta
 
 	Button* ret = new Button(x, y, usingTexture, standby, OnClick, Tick, CHECKBOX);
 	buttons.add(ret);
+
+	return ret;
+}
+
+inputText * j1Gui::createInputText(_TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture * texture, SDL_Rect section)
+{
+	SDL_Texture* usingTexture = (texture) ? texture : atlas;
+
+	inputText* ret = new inputText(font, color, x, y, usingTexture, section);
+	inputTexts.add(ret);
 
 	return ret;
 }
@@ -209,6 +267,24 @@ void j1Gui::blitButtons()
 	}
 }
 
+void j1Gui::blitInputTexts()
+{
+	for (p2List_item<inputText*>* item = inputTexts.start; item; item = item->next)
+	{
+		App->render->Blit(item->data->texture, item->data->position.x, item->data->position.y, &item->data->box, false);
+
+		if (item->data->text != nullptr)
+		{
+			item->data->text->createTexture();
+			item->data->text->position.x = item->data->position.x + item->data->box.w / 2 - item->data->text->tex_width / 2;
+			item->data->text->position.y = item->data->position.y + item->data->box.h / 2 - item->data->text->tex_height / 2;
+			if (item->data->text->outline)
+				App->render->Blit(item->data->text->outline, item->data->text->position.x + item->data->text->outline_offset.x, item->data->text->position.y + item->data->text->outline_offset.y, NULL, false);
+			App->render->Blit(item->data->text->texture, item->data->text->position.x, item->data->text->position.y, NULL, false);
+		}
+	}
+}
+
 // class Gui ---------------------------------------------------
 
 Text::~Text()
@@ -240,11 +316,11 @@ void Text::createTexture()
 	
 	uint outline_width, outline_height;
 	App->font->setFontOutline(font, 2);
-	outline = App->font->Print(text, {0, 0, 0, 255}, font); //Outlined texture
+	outline = App->font->Print(text.GetString(), {0, 0, 0, 255}, font); //Outlined texture
 	App->tex->GetSize(outline, outline_width, outline_height);
 
 	App->font->setFontOutline(font, 0);
-	texture = App->font->Print(text, color, font); //Normal texture
+	texture = App->font->Print(text.GetString(), color, font); //Normal texture
 	App->tex->GetSize(texture, tex_width, tex_height);
 
 	outline_offset.x = tex_width - outline_width;
@@ -278,5 +354,38 @@ Button::~Button()
 	{
 		delete text;
 		text = nullptr;
+	}
+}
+
+inputText::~inputText()
+{
+	if (texture != nullptr && texture != App->gui->GetAtlas())
+	{
+		App->tex->UnLoad(texture);
+		texture = nullptr;
+	}
+	if (text != nullptr)
+	{
+		delete text;
+		text = nullptr;
+	}
+}
+
+void inputText::readInput()
+{
+	SDL_Event e;
+	while (SDL_PollEvent(&e) != 0)
+	{
+		if (e.type == SDL_KEYDOWN)
+		{
+			if (e.key.keysym.sym == SDLK_BACKSPACE && text->text.Length() > 0)
+			{
+				text->text.Cut(0, text->text.Length() - 1);
+			}
+		}
+		else if (e.type == SDL_TEXTINPUT)
+		{
+			text->text += e.text.text;
+		}
 	}
 }
