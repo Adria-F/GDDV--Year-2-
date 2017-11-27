@@ -173,7 +173,7 @@ private:
 	p2List<Button*> buttons;
 	p2List<inputText*> inputTexts;
 
-	p2SString test;
+
 };
 
 #endif // __j1GUI_H__

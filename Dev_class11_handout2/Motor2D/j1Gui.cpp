@@ -31,7 +31,6 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 bool j1Gui::Start()
 {
 	atlas = App->tex->Load(atlas_file_name.GetString());
-	SDL_StartTextInput();
 
 	return true;
 }
@@ -60,10 +59,7 @@ bool j1Gui::PreUpdate()
 			if (x > item->data->position.x && x < item->data->position.x + item->data->box.w && y > item->data->position.y && y < item->data->position.y + item->data->box.h)
 			{
 				item->data->reading = true;
-			}
-			else
-			{ 
-				item->data->reading = false;
+				SDL_StartTextInput();
 			}
 		}
 	}
@@ -79,40 +75,23 @@ bool j1Gui::PreUpdate()
 		}
 	}
 
-	for (p2List_item<inputText*>* item = inputTexts.start; item; item = item->next) //Input Text
-	{
-		if (item->data->reading)
-		{
-			item->data->readInput();
-			break;
-		}
-	}
-
 	return true;
 }
 
 // Called after all Updates
 bool j1Gui::PostUpdate()
-{
+{	
 	blitImages();
 	blitTexts();
 	blitButtons();
 	blitInputTexts();
 
-
-	SDL_Event e;
-	while (SDL_PollEvent(&e) != 0)
+	for (p2List_item<inputText*>* item = inputTexts.start; item; item = item->next) //Input Text reading
 	{
-		if (e.type == SDL_KEYDOWN)
+		if (item->data->reading)
 		{
-			if (e.key.keysym.sym == SDLK_BACKSPACE && test.Length() > 0)
-			{
-				test.Cut(0, test.Length() - 1);
-			}
-		}
-		else if (e.type == SDL_TEXTINPUT)
-		{
-			test += e.text.text;
+			item->data->readInput();
+			break;
 		}
 	}
 
@@ -381,6 +360,16 @@ void inputText::readInput()
 			if (e.key.keysym.sym == SDLK_BACKSPACE && text->text.Length() > 0)
 			{
 				text->text.Cut(0, text->text.Length() - 1);
+			}
+		}
+		else if (e.type == SDL_MOUSEBUTTONDOWN)
+		{
+			int x, y;
+			App->input->GetMousePosition(x, y);
+			if (!(x > position.x && x < position.x + box.w && y > position.y && y <position.y + box.h)) //This event should be able to be detected in other modules
+			{
+				reading = false;
+				SDL_StopTextInput();
 			}
 		}
 		else if (e.type == SDL_TEXTINPUT)
