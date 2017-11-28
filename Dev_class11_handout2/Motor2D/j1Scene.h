@@ -4,9 +4,6 @@
 #include "j1Module.h"
 
 struct SDL_Texture;
-struct Image;
-struct Text;
-struct Button;
 
 class j1Scene : public j1Module
 {
@@ -37,9 +34,6 @@ public:
 
 private:
 	SDL_Texture* debug_tex;
-	Button* login_button;
-	Button* manageAccount_button;
-	Button* quit_button;
 };
 
 #endif // __j1SCENE_H__

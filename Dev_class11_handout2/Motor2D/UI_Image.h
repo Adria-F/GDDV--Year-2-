@@ -15,14 +15,9 @@ public:
 		section(section)
 	{}
 
-	~Image()
-	{
-		if (section != nullptr)
-		{
-			delete section;
-			section = nullptr;
-		}
-	}
+	~Image();
+
+	void BlitElement();
 
 public:
 

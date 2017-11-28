@@ -2,6 +2,7 @@
 #include "j1App.h"
 #include "j1Textures.h"
 #include "j1Fonts.h"
+#include "j1Render.h"
 
 Text::~Text()
 {
@@ -26,16 +27,43 @@ void Text::createTexture()
 	}
 
 	uint outline_width, outline_height;
-	App->font->setFontOutline(font, 2);
-	outline = App->font->Print(text.GetString(), { 0, 0, 0, 255 }, font); //Outlined texture
-	App->tex->GetSize(outline, outline_width, outline_height);
+	if (outlined)
+	{
+		App->font->setFontOutline(font, 2);
+		outline = App->font->Print(text.GetString(), outline_color, font); //Outlined texture
+		App->tex->GetSize(outline, outline_width, outline_height);
+	}
 
 	App->font->setFontOutline(font, 0);
 	texture = App->font->Print(text.GetString(), color, font); //Normal texture
 	App->tex->GetSize(texture, tex_width, tex_height);
 
-	outline_offset.x = tex_width - outline_width;
-	outline_offset.x /= 2;
-	outline_offset.y = outline_offset.x;
+	if (outlined)
+	{
+		outline_offset.x = tex_width - outline_width;
+		outline_offset.x /= 2;
+		outline_offset.y = outline_offset.x;
+	}
 
+}
+
+void Text::setOutlineColor(SDL_Color newColor)
+{
+	outline_color = newColor;
+}
+
+void Text::BlitElement()
+{
+	if (outlined)
+		App->render->Blit(outline, position.x + outline_offset.x, position.y + outline_offset.y, NULL, false);
+	App->render->Blit(texture, position.x, position.y, NULL, false);
+}
+
+void Text::setOutlined(bool isOutlined)
+{
+	if (isOutlined != outlined)
+	{
+		outlined = isOutlined;
+		createTexture();
+	}
 }

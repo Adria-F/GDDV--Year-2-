@@ -9,121 +9,12 @@
 
 struct _TTF_Font;
 struct SDL_Texture;
+class UI_element;
 
 enum mouse_interaction
 {
 	MOUSE_ENTER,
 	MOUSE_LEAVE
-};
-
-enum button_state
-{
-	STANDBY,
-	MOUSEOVER,
-	CLICKED
-};
-
-enum button_type
-{
-	LINK,
-	CHECKBOX
-};
-
-struct Text
-{
-	Text()
-	{}
-
-	Text(char* text, int x, int y, _TTF_Font* font, SDL_Color color) : text(text), position({x, y}), font(font), color(color)
-	{}
-
-	~Text();
-
-	p2SString text = nullptr;
-	_TTF_Font* font = nullptr;
-	iPoint position;
-	SDL_Color color;
-	SDL_Texture* texture;
-	SDL_Texture* outline;
-	uint tex_width;
-	uint tex_height;
-	iPoint outline_offset;
-
-	void createTexture();
-};
-
-struct Image
-{
-	Image()
-	{}
-
-	Image(SDL_Texture* texture, int x, int y, SDL_Rect* section): texture(texture), position({x, y}), section(section)
-	{}
-
-	~Image();
-
-	iPoint position;
-	SDL_Texture* texture = nullptr;
-	SDL_Rect* section = nullptr;
-};
-
-struct Button
-{	
-	Button()
-	{}
-
-	Button(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick, button_type type) :
-		position({ x, y }),
-		texture(texture),
-		standby(standby),
-		OnMouse(OnMouse),
-		Tick(OnMouse),
-		OnClick(OnClick),
-		type(type)
-	{
-		this->text = new Text(text, position.x, position.y, font, color);
-	}
-
-	Button(int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnClick, SDL_Rect Tick, button_type type) :
-		position({ x, y }),
-		texture(texture),
-		standby(standby),
-		Tick(Tick),
-		OnClick(OnClick),
-		type(type)
-	{}
-
-	~Button();
-
-	Text* text = nullptr;
-	iPoint position;
-	SDL_Texture* texture = nullptr;
-	SDL_Rect standby;
-	SDL_Rect OnMouse;
-	SDL_Rect Tick;
-	SDL_Rect OnClick;
-	button_state state = STANDBY;
-	button_type type = LINK;
-	bool tick = false;
-	bool clicked = false;
-};
-
-struct inputText
-{
-	inputText(_TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect section): position({x,y}), texture(texture), box(section)
-	{
-		this->text = new Text("", position.x, position.y, font, color);
-	}
-
-	~inputText();
-
-	Text* text = nullptr;
-	iPoint position;
-	SDL_Texture* texture = nullptr;
-	SDL_Rect box;
-	bool reading = false;
-
-	void readInput();
 };
 
 // ---------------------------------------------------
@@ -155,31 +46,21 @@ public:
 	// Gui creation functions
 
 	const SDL_Texture* GetAtlas() const;
-	Text* createText(char* text, int x, int y, _TTF_Font* font, SDL_Color color = { 255, 255, 255, 255 });
-	Image* createImage(int x, int y, SDL_Texture* texture);
-	Image* createImageFromAtlas(int x, int y, SDL_Rect section);
+	UI_element* createText(char* text, int x, int y, _TTF_Font* font, SDL_Color color = { 255, 255, 255, 255 });
+	UI_element* createImage(int x, int y, SDL_Texture* texture);
+	UI_element* createImageFromAtlas(int x, int y, SDL_Rect section);
 	//NULL texture to use atlas
-	Button* createButton(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick);
+	UI_element* createButton(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick);
 	//NULL texture to use atlas
-	Button* createCheckBox(int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnClick, SDL_Rect Tick);
+	UI_element* createCheckBox(int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnClick, SDL_Rect Tick);
 	//NULL texture to use atlas
-	inputText* createInputText(_TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect section);
-
-private:
-
-	void blitTexts();
-	void blitImages();
-	void blitButtons();
-	void blitInputTexts();
+	UI_element* createInputText(_TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect section);
 
 private:
 
 	SDL_Texture* atlas;
 	p2SString atlas_file_name;
-	p2List<Text*> texts;
-	p2List<Image*> images;
-	p2List<Button*> buttons;
-	p2List<inputText*> inputTexts;
+	p2List<UI_element*> UI_elements;
 
 
 };

@@ -1,9 +1,25 @@
 #ifndef __UI_BUTTON__
 
 #include "UI_element.h"
+#include "UI_Text.h"
+
+enum button_state
+{
+	STANDBY,
+	MOUSEOVER,
+	CLICKED
+};
+
+enum button_type
+{
+	LINK,
+	CHECKBOX
+};
 
 class Button : public UI_element
 {
+public:
+
 	Button()
 	{}
 
@@ -14,12 +30,10 @@ class Button : public UI_element
 		OnClick(OnClick),
 		type(type)
 	{
-		this->text = new Text(text, position.x, position.y, font, color);
+		this->text = new Text(text, position.x, position.y, font, color, nullptr);
 	}
 
-	Button(int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnClick, SDL_Rect Tick, button_type type) :
-		position({ x, y }),
-		texture(texture),
+	Button(int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnClick, SDL_Rect Tick, button_type type, j1Module* callback) : UI_element(x, y, element_type::BUTTON, callback, texture),
 		standby(standby),
 		Tick(Tick),
 		OnClick(OnClick),
@@ -28,9 +42,12 @@ class Button : public UI_element
 
 	~Button();
 
+	void setOutlined(bool isOutlined);
+	void BlitElement();
+
+public:
+
 	Text* text = nullptr;
-	iPoint position;
-	SDL_Texture* texture = nullptr;
 	SDL_Rect standby;
 	SDL_Rect OnMouse;
 	SDL_Rect Tick;

@@ -17,21 +17,31 @@ public:
 		text(text),
 		font(font),
 		color(color)
-	{}
+	{
+		createTexture();
+	}
 
 	~Text();
+
+	void createTexture();
+	void setOutlineColor(SDL_Color newColor);
+	void BlitElement();
+	void setOutlined(bool isOutlined);
 
 public:
 
 	p2SString text = nullptr;
-	_TTF_Font* font = nullptr;
 	SDL_Color color;
-	SDL_Texture* outline = nullptr;
 	uint tex_width;
 	uint tex_height;
-	iPoint outline_offset;
 
-	void createTexture();
+private:
+
+	_TTF_Font* font = nullptr;
+	bool outlined = false;
+	SDL_Texture* outline = nullptr;
+	SDL_Color outline_color = { 0, 0, 0, 255 };
+	iPoint outline_offset;
 };
 
 #endif // !__UI_TEXT__

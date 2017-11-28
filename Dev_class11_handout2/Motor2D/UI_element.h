@@ -37,6 +37,12 @@ public:
 		}
 	}
 
+	virtual void setOutlined(bool isOutlined)
+	{}
+
+	virtual void BlitElement()
+	{}
+
 public:
 
 	SDL_Texture* texture = nullptr;

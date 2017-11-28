@@ -52,6 +52,15 @@
     <ClCompile Include="UI_Text.cpp">
       <Filter>Desenvolupament  ========\Modules\UI Elements</Filter>
     </ClCompile>
+    <ClCompile Include="UI_InputBox.cpp">
+      <Filter>Desenvolupament  ========\Modules\UI Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Image.cpp">
+      <Filter>Desenvolupament  ========\Modules\UI Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Button.cpp">
+      <Filter>Desenvolupament  ========\Modules\UI Elements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -130,6 +139,9 @@
       <Filter>Desenvolupament  ========\Modules\UI Elements</Filter>
     </ClInclude>
     <ClInclude Include="UI_Button.h">
+      <Filter>Desenvolupament  ========\Modules\UI Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_InputBox.h">
       <Filter>Desenvolupament  ========\Modules\UI Elements</Filter>
     </ClInclude>
   </ItemGroup>
