@@ -18,6 +18,13 @@ enum element_type
 	INPUTTEXT
 };
 
+enum element_state
+{
+	STANDBY,
+	MOUSEOVER,
+	CLICKED
+};
+
 class UI_element
 {
 public:
@@ -25,7 +32,7 @@ public:
 	UI_element()
 	{}
 
-	UI_element(int x, int y, element_type type, j1Module* callback, SDL_Texture* texture = nullptr): position({x, y}), element_type(type), callback(callback), texture(texture)
+	UI_element(int x, int y, element_type type, SDL_Rect section, j1Module* callback, SDL_Texture* texture = nullptr): position({x, y}), element_type(type), section(section), callback(callback), texture(texture)
 	{}
 
 	virtual ~UI_element()
@@ -47,8 +54,11 @@ public:
 
 	SDL_Texture* texture = nullptr;
 	iPoint position;
+	SDL_Rect section;
 	element_type element_type;
+	element_state state = STANDBY;
 	j1Module* callback = nullptr;
+	bool hovering = false;
 };
 
 #endif // !__UI_ELEMENT__

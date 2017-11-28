@@ -37,6 +37,8 @@ void Text::createTexture()
 	App->font->setFontOutline(font, 0);
 	texture = App->font->Print(text.GetString(), color, font); //Normal texture
 	App->tex->GetSize(texture, tex_width, tex_height);
+	section.w = tex_width;
+	section.h = tex_height;
 
 	if (outlined)
 	{

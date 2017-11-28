@@ -8,8 +8,7 @@ class InputBox : public UI_element
 {
 public:
 
-	InputBox(_TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect section, j1Module* callback) : UI_element(x, y, element_type::INPUTTEXT, callback, texture),
-		box(section)
+	InputBox(_TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect section, j1Module* callback) : UI_element(x, y, element_type::INPUTTEXT, section, callback, texture)
 	{
 		this->text = new Text("", position.x, position.y, font, color, nullptr);
 	}
@@ -23,7 +22,6 @@ public:
 public:
 
 	Text* text = nullptr;
-	SDL_Rect box;
 	bool reading = false;
 };
 

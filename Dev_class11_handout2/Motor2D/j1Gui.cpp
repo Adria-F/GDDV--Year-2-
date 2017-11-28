@@ -83,6 +83,45 @@ bool j1Gui::PreUpdate()
 	return true;
 }
 
+bool j1Gui::Update(float dt)
+{
+	int x, y;
+	App->input->GetMousePosition(x, y);
+	for (p2List_item<UI_element*>* item = UI_elements.start; item; item = item->next)
+	{
+		if (x > item->data->position.x && x < item->data->position.x + item->data->section.w && y > item->data->position.y && y < item->data->position.y + item->data->section.h)
+		{
+			if (!item->data->hovering)
+			{
+				item->data->hovering = true;
+				if (item->data->callback != nullptr)
+					item->data->callback->OnUIEvent(item->data, MOUSE_ENTER);
+			}
+			else if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+			{
+				if (item->data->callback != nullptr)
+					item->data->callback->OnUIEvent(item->data, MOUSE_CLICK);
+			}
+			else if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
+			{
+				if (item->data->callback != nullptr)
+					item->data->callback->OnUIEvent(item->data, MOUSE_RELEASE);
+			}
+		}
+		else
+		{
+			if (item->data->hovering)
+			{
+				item->data->hovering = false;
+				if (item->data->callback != nullptr)
+					item->data->callback->OnUIEvent(item->data, MOUSE_LEAVE);
+			}
+		}
+	}
+
+	return true;
+}
+
 // Called after all Updates
 bool j1Gui::PostUpdate()
 {	
@@ -126,56 +165,55 @@ const SDL_Texture* j1Gui::GetAtlas() const
 	return atlas;
 }
 
-UI_element* j1Gui::createText(char* text, int x, int y, _TTF_Font* font, SDL_Color color)
+UI_element* j1Gui::createText(char* text, int x, int y, _TTF_Font* font, SDL_Color color, j1Module* callback)
 {
-	Text* ret = new Text(text, x, y, font, color, this);
+	Text* ret = new Text(text, x, y, font, color, callback);
 	UI_elements.add(ret);
 	
 	return ret;
 }
 
-UI_element* j1Gui::createImage(int x, int y, SDL_Texture* texture)
+UI_element* j1Gui::createImage(int x, int y, SDL_Texture* texture, j1Module* callback)
 {
-	Image* ret = new Image(texture, x, y, NULL, this);
+	Image* ret = new Image(texture, x, y, {0, 0, 0, 0}, callback);
 	UI_elements.add(ret);
 	
 	return ret;
 }
 
-UI_element* j1Gui::createImageFromAtlas(int x, int y, SDL_Rect section)
+UI_element* j1Gui::createImageFromAtlas(int x, int y, SDL_Rect section, j1Module* callback)
 {
-	SDL_Rect* rect = new SDL_Rect(section);
-	Image* ret = new Image(atlas, x, y, rect, this);
+	Image* ret = new Image(atlas, x, y, section, callback);
 	UI_elements.add(ret);
 
 	return ret;
 }
 
-UI_element * j1Gui::createCheckBox(int x, int y, SDL_Texture * texture, SDL_Rect standby, SDL_Rect OnClick, SDL_Rect Tick)
-{
-	SDL_Texture* usingTexture = (texture) ? texture : atlas;
-
-	Button* ret = new Button(x, y, usingTexture, standby, OnClick, Tick, CHECKBOX, this);
-	UI_elements.add(ret);
-
-	return ret;
-}
-
-UI_element * j1Gui::createInputText(_TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture * texture, SDL_Rect section)
+UI_element * j1Gui::createCheckBox(int x, int y, SDL_Texture * texture, SDL_Rect standby, SDL_Rect OnClick, SDL_Rect Tick, j1Module* callback)
 {
 	SDL_Texture* usingTexture = (texture) ? texture : atlas;
 
-	InputBox* ret = new InputBox(font, color, x, y, usingTexture, section, this);
+	Button* ret = new Button(x, y, usingTexture, standby, OnClick, Tick, CHECKBOX, callback);
 	UI_elements.add(ret);
 
 	return ret;
 }
 
-UI_element* j1Gui::createButton(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick)
+UI_element * j1Gui::createInputText(_TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture * texture, SDL_Rect section, j1Module* callback)
+{
+	SDL_Texture* usingTexture = (texture) ? texture : atlas;
+
+	InputBox* ret = new InputBox(font, color, x, y, usingTexture, section, callback);
+	UI_elements.add(ret);
+
+	return ret;
+}
+
+UI_element* j1Gui::createButton(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick, j1Module* callback)
 {
 	SDL_Texture* usingTexture = (texture) ? texture : atlas;
 	
-	Button* ret = new Button(text, font, color, x, y, usingTexture, standby, OnMouse, OnClick, LINK, this);
+	Button* ret = new Button(text, font, color, x, y, usingTexture, standby, OnMouse, OnClick, LINK, callback);
 	UI_elements.add(ret);
 	
 	return ret;

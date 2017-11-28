@@ -11,10 +11,12 @@ struct _TTF_Font;
 struct SDL_Texture;
 class UI_element;
 
-enum mouse_interaction
+enum event_type
 {
 	MOUSE_ENTER,
-	MOUSE_LEAVE
+	MOUSE_LEAVE,
+	MOUSE_CLICK,
+	MOUSE_RELEASE
 };
 
 // ---------------------------------------------------
@@ -36,6 +38,8 @@ public:
 	// Called before all Updates
 	bool PreUpdate();
 
+	bool Update(float dt);
+
 	// Called after all Updates
 	bool PostUpdate();
 
@@ -46,15 +50,15 @@ public:
 	// Gui creation functions
 
 	const SDL_Texture* GetAtlas() const;
-	UI_element* createText(char* text, int x, int y, _TTF_Font* font, SDL_Color color = { 255, 255, 255, 255 });
-	UI_element* createImage(int x, int y, SDL_Texture* texture);
-	UI_element* createImageFromAtlas(int x, int y, SDL_Rect section);
+	UI_element* createText(char* text, int x, int y, _TTF_Font* font, SDL_Color color = { 255, 255, 255, 255 }, j1Module* callback = nullptr);
+	UI_element* createImage(int x, int y, SDL_Texture* texture, j1Module* callback = nullptr);
+	UI_element* createImageFromAtlas(int x, int y, SDL_Rect section, j1Module* callback = nullptr);
 	//NULL texture to use atlas
-	UI_element* createButton(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick);
+	UI_element* createButton(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick, j1Module* callback = nullptr);
 	//NULL texture to use atlas
-	UI_element* createCheckBox(int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnClick, SDL_Rect Tick);
+	UI_element* createCheckBox(int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnClick, SDL_Rect Tick, j1Module* callback = nullptr);
 	//NULL texture to use atlas
-	UI_element* createInputText(_TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect section);
+	UI_element* createInputText(_TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect section, j1Module* callback = nullptr);
 
 private:
 

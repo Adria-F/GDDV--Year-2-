@@ -3,13 +3,6 @@
 #include "UI_element.h"
 #include "UI_Text.h"
 
-enum button_state
-{
-	STANDBY,
-	MOUSEOVER,
-	CLICKED
-};
-
 enum button_type
 {
 	LINK,
@@ -23,8 +16,7 @@ public:
 	Button()
 	{}
 
-	Button(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick, button_type type, j1Module* callback) : UI_element(x, y, element_type::BUTTON, callback, texture),
-		standby(standby),
+	Button(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick, button_type type, j1Module* callback) : UI_element(x, y, element_type::BUTTON, standby, callback, texture),
 		OnMouse(OnMouse),
 		Tick(OnMouse),
 		OnClick(OnClick),
@@ -33,8 +25,7 @@ public:
 		this->text = new Text(text, position.x, position.y, font, color, nullptr);
 	}
 
-	Button(int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnClick, SDL_Rect Tick, button_type type, j1Module* callback) : UI_element(x, y, element_type::BUTTON, callback, texture),
-		standby(standby),
+	Button(int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnClick, SDL_Rect Tick, button_type type, j1Module* callback) : UI_element(x, y, element_type::BUTTON, standby, callback, texture),
 		Tick(Tick),
 		OnClick(OnClick),
 		type(type)
@@ -48,11 +39,9 @@ public:
 public:
 
 	Text* text = nullptr;
-	SDL_Rect standby;
 	SDL_Rect OnMouse;
 	SDL_Rect Tick;
 	SDL_Rect OnClick;
-	button_state state = STANDBY;
 	button_type type = LINK;
 	bool tick = false;
 	bool clicked = false;

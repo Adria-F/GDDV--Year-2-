@@ -19,18 +19,27 @@ void Button::setOutlined(bool isOutlined)
 
 void Button::BlitElement()
 {
-	if (clicked)
+	switch (state)
+	{
+	case STANDBY:
+		App->render->Blit(texture, position.x, position.y, &section, false);
+		break;
+	case MOUSEOVER:
+		App->render->Blit(texture, position.x, position.y, &OnMouse, false);
+		break;
+	case CLICKED:
 		App->render->Blit(texture, position.x, position.y, &OnClick, false);
-	else
-		App->render->Blit(texture, position.x, position.y, &standby, false);
+		break;
+	}
+
 	if (type == CHECKBOX && tick)
 	{
 		App->render->Blit(texture, position.x, position.y, &Tick, false);
 	}
 	else if (type == LINK)
 	{
-		text->position.x = position.x + standby.w / 2 - text->tex_width / 2;
-		text->position.y = position.y + standby.h / 2 - text->tex_height / 2;
+		text->position.x = position.x + section.w / 2 - text->tex_width / 2;
+		text->position.y = position.y + section.h / 2 - text->tex_height / 2;
 		
 		text->BlitElement();
 	}

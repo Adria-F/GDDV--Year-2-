@@ -10,6 +10,8 @@
 #include "PugiXml\src\pugixml.hpp"
 
 class j1App;
+class UI_element;
+enum event_type;
 
 class j1Module
 {
@@ -58,6 +60,11 @@ public:
 
 	// Called before quitting
 	virtual bool CleanUp()
+	{
+		return true;
+	}
+
+	virtual bool OnUIEvent(UI_element* element, event_type event_type)
 	{
 		return true;
 	}
