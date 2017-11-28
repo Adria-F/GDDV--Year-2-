@@ -52,6 +52,8 @@ void Text::createTexture()
 void Text::setOutlineColor(SDL_Color newColor)
 {
 	outline_color = newColor;
+	if (outlined)
+		createTexture();
 }
 
 void Text::BlitElement()
