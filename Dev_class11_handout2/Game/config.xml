@@ -19,7 +19,7 @@
   </window>
 
   <gui>
-    <atlas file="gui/wow_atlas.png"/>
+    <atlas file="gui/atlas.png"/>
   </gui>
 
   <map>

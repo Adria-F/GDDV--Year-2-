@@ -3,12 +3,18 @@
 
 #include "j1Module.h"
 #include "p2Point.h"
+#include "SDL/include/SDL_rect.h"
 
 #define CURSOR_WIDTH 2
 
 struct _TTF_Font;
 struct SDL_Texture;
 
+enum mouse_interaction
+{
+	MOUSE_ENTER,
+	MOUSE_LEAVE
+};
 
 enum button_state
 {
@@ -154,7 +160,9 @@ public:
 	Image* createImageFromAtlas(int x, int y, SDL_Rect section);
 	//NULL texture to use atlas
 	Button* createButton(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick);
+	//NULL texture to use atlas
 	Button* createCheckBox(int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnClick, SDL_Rect Tick);
+	//NULL texture to use atlas
 	inputText* createInputText(_TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect section);
 
 private:

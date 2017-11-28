@@ -111,8 +111,6 @@ bool j1Scene::Update(float dt)
 	}
 	// ------------------------------------------------
 
-	
-
 	// Parallax
 	p2List_item<ImageLayer*>* image = nullptr; // Parallax when player moves
 	for (image = App->map->data.image_layers.start; image; image = image->next)
