@@ -1,12 +1,12 @@
 ﻿  j1Scene.cpp
   j1Gui.cpp
+  Generating Code...
+  Compiling...
   j1App.cpp
 d:\rma\gddv--year-2-\dev_class11_handout2\motor2d\j1app.cpp(217): warning C4018: '<': signed/unsigned mismatch
 d:\rma\gddv--year-2-\dev_class11_handout2\motor2d\j1app.cpp(213): warning C4477: 'sprintf_s' : format string '%lu' requires an argument of type 'unsigned long', but variadic argument 6 has type 'uint64'
   d:\rma\gddv--year-2-\dev_class11_handout2\motor2d\j1app.cpp(213): note: consider using '%llu' in the format string
   d:\rma\gddv--year-2-\dev_class11_handout2\motor2d\j1app.cpp(213): note: consider using '%I64u' in the format string
-  Generating Code...
-  Compiling...
   UI_Text.cpp
   UI_InputBox.cpp
   UI_Image.cpp

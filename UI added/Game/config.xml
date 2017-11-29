@@ -24,7 +24,7 @@
     <path>data.zip</path>
   </file_system>
 
-  <gui>
+   <gui>
     <atlas file="gui/atlas.png"/>
   </gui>
   

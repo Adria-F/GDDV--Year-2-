@@ -100,12 +100,22 @@ bool j1Gui::Update(float dt)
 			else if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 			{
 				if (item->data->callback != nullptr)
-					item->data->callback->OnUIEvent(item->data, MOUSE_CLICK);
+					item->data->callback->OnUIEvent(item->data, MOUSE_LEFT_CLICK);
 			}
 			else if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
 			{
 				if (item->data->callback != nullptr)
-					item->data->callback->OnUIEvent(item->data, MOUSE_RELEASE);
+					item->data->callback->OnUIEvent(item->data, MOUSE_LEFT_RELEASE);
+			}
+			else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
+			{
+				if (item->data->callback != nullptr)
+					item->data->callback->OnUIEvent(item->data, MOUSE_RIGHT_CLICK);
+			}
+			else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_UP)
+			{
+				if (item->data->callback != nullptr)
+					item->data->callback->OnUIEvent(item->data, MOUSE_RIGHT_RELEASE);
 			}
 		}
 		else

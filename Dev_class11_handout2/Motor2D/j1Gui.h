@@ -20,8 +20,10 @@ enum event_type
 {
 	MOUSE_ENTER,
 	MOUSE_LEAVE,
-	MOUSE_CLICK,
-	MOUSE_RELEASE
+	MOUSE_RIGHT_CLICK,
+	MOUSE_RIGHT_RELEASE,
+	MOUSE_LEFT_CLICK,
+	MOUSE_LEFT_RELEASE
 };
 
 // ---------------------------------------------------

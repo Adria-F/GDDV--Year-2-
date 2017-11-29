@@ -7,12 +7,11 @@
 	<:anonymous />
 	<scene />
 	<entityManager>
-		<player position_x="19" position_y="340" level="1" />
-		<player position_x="19" position_y="345" />
+		<player position_x="174" position_y="318" level="1" />
+		<player position_x="174" position_y="323" />
 		<charger position_x="1507" position_y="16" />
 		<bat position_x="1946" position_y="12" />
-		<charger position_x="701" position_y="175" />
-		<bat position_x="361" position_y="185" />
+		<charger position_x="733" position_y="178" />
 	</entityManager>
 	<map />
 	<:anonymous />

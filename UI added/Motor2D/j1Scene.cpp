@@ -12,7 +12,6 @@
 #include "j1Player.h"
 #include "j1PathFinding.h"
 #include "j1EntityManager.h"
-#include "j1UIManager.h"
 #include "Brofiler\Brofiler.h"
 
 j1Scene::j1Scene() : j1Module()
@@ -37,6 +36,7 @@ j1Scene::~j1Scene()
 // Called before render is available
 bool j1Scene::Awake()
 {
+
 	LOG("Loading Scene");
 	bool ret = true;
 
@@ -110,6 +110,8 @@ bool j1Scene::Update(float dt)
 		App->render->virtualCamPos -= App->entityManager->getPlayer()->speed * 2 * dt; //*dt
 	}
 	// ------------------------------------------------
+
+	
 
 	// Parallax
 	p2List_item<ImageLayer*>* image = nullptr; // Parallax when player moves

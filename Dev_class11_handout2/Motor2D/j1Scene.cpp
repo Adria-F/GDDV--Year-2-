@@ -12,6 +12,7 @@
 #include "j1Scene.h"
 #include "j1Fonts.h"
 #include "UI_element.h"
+#include "UI_Text.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -34,13 +35,12 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {	
-	SDL_Color text_color = { 255, 215, 70, 255 };
-	_TTF_Font* text_font = App->font->Load("fonts/wow/FRIZQUAD.ttf", 36);
+	SDL_Color text_color = { 255, 255, 255, 255 }; //255 215 70
+	_TTF_Font* text_font = App->font->Load("fonts/wow/FRIZQUAD.ttf", 15);
 
 	App->gui->createImage(0, 0, App->tex->Load("textures/login_background.png")); //Background Image
 	App->gui->createButton("", text_font, text_color, 100, 100, NULL, { 642,169,229,69 }, { 0,113,229,69 }, { 411,169,229,69 }, this);
-	App->gui->createButton("", text_font, text_color, 100, 200, NULL, { 642,169,229,69 }, { 0,113,229,69 }, { 411,169,229,69 }, this);
-	App->gui->createButton("", text_font, text_color, 100, 300, NULL, { 642,169,229,69 }, { 0,113,229,69 }, { 411,169,229,69 }, this);
+	text = App->gui->createText("Hello World", 120, 80, text_font, text_color, this);
 
 	/*App->gui->createImageFromAtlas(10, 10, { 230, 19, 179, 80 }); //Wow Logo
 	App->gui->createImageFromAtlas(430, 470, { 39, 32, 66, 43 }); //Blizzard Logo
@@ -102,12 +102,37 @@ bool j1Scene::PostUpdate()
 
 bool j1Scene::OnUIEvent(UI_element* element, event_type event_type)
 {
-	if (event_type == MOUSE_ENTER || event_type == MOUSE_RELEASE)
+	if (event_type == MOUSE_ENTER || event_type == MOUSE_LEFT_RELEASE || event_type == MOUSE_RIGHT_RELEASE)
+	{
 		element->state = MOUSEOVER;
+		if (element == (UI_element*)text)
+		{
+			text->setText("Hovering");
+		}
+	}
 	else if (event_type == MOUSE_LEAVE)
+	{
 		element->state = STANDBY;
-	else if (event_type == MOUSE_CLICK)
+		if (element == (UI_element*)text)
+		{
+			text->setText("Hello World");
+		}
+	}
+	else if (event_type == MOUSE_LEFT_CLICK)
+	{
 		element->state = CLICKED;
+		if (element == (UI_element*)text)
+		{
+			text->setText("Left click");
+		}
+	}
+	else if (event_type == MOUSE_RIGHT_CLICK)
+	{
+		if (element == (UI_element*)text)
+		{
+			text->setText("Right click");
+		}
+	}
 
 	return true;
 }
