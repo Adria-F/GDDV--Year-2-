@@ -24,19 +24,26 @@ public:
 	~Text();
 
 	void createTexture();
+	void setColor(SDL_Color newColor);
 	void setOutlineColor(SDL_Color newColor);
-	void BlitElement();
 	void setOutlined(bool isOutlined);
+
+	p2SString getText() const;
+	void setText(const char* string);
+	void setText(const p2SString string);
+	int getLength() const;
+
+	void BlitElement();
 
 public:
 
-	p2SString text = nullptr;
 	SDL_Color color;
 	uint tex_width;
 	uint tex_height;
 
 private:
 
+	p2SString text = nullptr;
 	_TTF_Font* font = nullptr;
 	bool outlined = false;
 	SDL_Texture* outline = nullptr;

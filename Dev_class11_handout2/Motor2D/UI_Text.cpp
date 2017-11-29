@@ -49,6 +49,12 @@ void Text::createTexture()
 
 }
 
+void Text::setColor(SDL_Color newColor)
+{
+	color = newColor;
+	createTexture();
+}
+
 void Text::setOutlineColor(SDL_Color newColor)
 {
 	outline_color = newColor;
@@ -70,4 +76,26 @@ void Text::setOutlined(bool isOutlined)
 		outlined = isOutlined;
 		createTexture();
 	}
+}
+
+p2SString Text::getText() const
+{
+	return text;
+}
+
+void Text::setText(const char * string)
+{
+	text = string;
+	createTexture();
+}
+
+void Text::setText(const p2SString string)
+{
+	text = string;
+	createTexture();
+}
+
+int Text::getLength() const
+{
+	return text.Length();
 }

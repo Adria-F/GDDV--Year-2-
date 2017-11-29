@@ -20,9 +20,9 @@ void InputBox::readInput()
 	{
 		if (e.type == SDL_KEYDOWN)
 		{
-			if (e.key.keysym.sym == SDLK_BACKSPACE && text->text.Length() > 0)
+			if (e.key.keysym.sym == SDLK_BACKSPACE && text->getLength() > 0)
 			{
-				text->text.Cut(0, text->text.Length() - 1);
+				//text->text.Cut(0, text->text.Length() - 1);
 			}
 		}
 		else if (e.type == SDL_MOUSEBUTTONDOWN)
@@ -37,7 +37,9 @@ void InputBox::readInput()
 		}
 		else if (e.type == SDL_TEXTINPUT)
 		{
-			text->text += e.text.text;
+			p2SString newText = text->getText();
+			newText += e.text.text;
+			text->setText(newText);
 		}
 	}
 }

@@ -35,7 +35,7 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {	
 	SDL_Color text_color = { 255, 215, 70, 255 };
-	_TTF_Font* text_font = App->font->Load("fonts/wow/FRIZQUAD.ttf");
+	_TTF_Font* text_font = App->font->Load("fonts/wow/FRIZQUAD.ttf", 36);
 
 	App->gui->createImage(0, 0, App->tex->Load("textures/login_background.png")); //Background Image
 	App->gui->createButton("", text_font, text_color, 100, 100, NULL, { 642,169,229,69 }, { 0,113,229,69 }, { 411,169,229,69 }, this);
@@ -57,8 +57,8 @@ bool j1Scene::Start()
 	App->gui->createButton("Quit", text_font, text_color, 810, 475, NULL, { 13, 188, 129, 25 }, { 13, 188, 129, 25 }, { 167, 188, 129, 25 });
 
 	//Input boxes
-	App->gui->createInputText(text_font, {255, 255, 255, 255}, 402, 320, NULL, { 311, 228, 128, 20 }); //Account Password
-	App->gui->createInputText(text_font, { 255, 255, 255, 255 }, 402, 260, NULL, { 311, 228, 128, 20 }); //Account Name
+	App->gui->createInputBox(text_font, {255, 255, 255, 255}, 402, 320, NULL, { 311, 228, 128, 20 }); //Account Password
+	App->gui->createInputBox(text_font, { 255, 255, 255, 255 }, 402, 260, NULL, { 311, 228, 128, 20 }); //Account Name
 
 	//Texts
 	App->gui->createText("Remember Account Name", 45, 425, text_font, text_color);

@@ -165,7 +165,7 @@ const SDL_Texture* j1Gui::GetAtlas() const
 	return atlas;
 }
 
-UI_element* j1Gui::createText(char* text, int x, int y, _TTF_Font* font, SDL_Color color, j1Module* callback)
+Text* j1Gui::createText(char* text, int x, int y, _TTF_Font* font, SDL_Color color, j1Module* callback)
 {
 	Text* ret = new Text(text, x, y, font, color, callback);
 	UI_elements.add(ret);
@@ -173,7 +173,7 @@ UI_element* j1Gui::createText(char* text, int x, int y, _TTF_Font* font, SDL_Col
 	return ret;
 }
 
-UI_element* j1Gui::createImage(int x, int y, SDL_Texture* texture, j1Module* callback)
+Image* j1Gui::createImage(int x, int y, SDL_Texture* texture, j1Module* callback)
 {
 	Image* ret = new Image(texture, x, y, {0, 0, 0, 0}, callback);
 	UI_elements.add(ret);
@@ -181,7 +181,7 @@ UI_element* j1Gui::createImage(int x, int y, SDL_Texture* texture, j1Module* cal
 	return ret;
 }
 
-UI_element* j1Gui::createImageFromAtlas(int x, int y, SDL_Rect section, j1Module* callback)
+Image* j1Gui::createImageFromAtlas(int x, int y, SDL_Rect section, j1Module* callback)
 {
 	Image* ret = new Image(atlas, x, y, section, callback);
 	UI_elements.add(ret);
@@ -189,7 +189,7 @@ UI_element* j1Gui::createImageFromAtlas(int x, int y, SDL_Rect section, j1Module
 	return ret;
 }
 
-UI_element * j1Gui::createCheckBox(int x, int y, SDL_Texture * texture, SDL_Rect standby, SDL_Rect OnClick, SDL_Rect Tick, j1Module* callback)
+Button* j1Gui::createCheckBox(int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnClick, SDL_Rect Tick, j1Module* callback)
 {
 	SDL_Texture* usingTexture = (texture) ? texture : atlas;
 
@@ -199,7 +199,7 @@ UI_element * j1Gui::createCheckBox(int x, int y, SDL_Texture * texture, SDL_Rect
 	return ret;
 }
 
-UI_element * j1Gui::createInputText(_TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture * texture, SDL_Rect section, j1Module* callback)
+InputBox* j1Gui::createInputBox(_TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture * texture, SDL_Rect section, j1Module* callback)
 {
 	SDL_Texture* usingTexture = (texture) ? texture : atlas;
 
@@ -209,7 +209,7 @@ UI_element * j1Gui::createInputText(_TTF_Font* font, SDL_Color color, int x, int
 	return ret;
 }
 
-UI_element* j1Gui::createButton(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick, j1Module* callback)
+Button* j1Gui::createButton(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick, j1Module* callback)
 {
 	SDL_Texture* usingTexture = (texture) ? texture : atlas;
 	

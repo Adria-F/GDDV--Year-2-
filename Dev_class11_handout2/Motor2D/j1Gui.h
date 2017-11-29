@@ -10,6 +10,11 @@
 struct _TTF_Font;
 struct SDL_Texture;
 class UI_element;
+class Text;
+class Image;
+class Button;
+class InputBox;
+//class Slider;
 
 enum event_type
 {
@@ -50,23 +55,21 @@ public:
 	// Gui creation functions
 
 	const SDL_Texture* GetAtlas() const;
-	UI_element* createText(char* text, int x, int y, _TTF_Font* font, SDL_Color color = { 255, 255, 255, 255 }, j1Module* callback = nullptr);
-	UI_element* createImage(int x, int y, SDL_Texture* texture, j1Module* callback = nullptr);
-	UI_element* createImageFromAtlas(int x, int y, SDL_Rect section, j1Module* callback = nullptr);
+	Text* createText(char* text, int x, int y, _TTF_Font* font, SDL_Color color = { 255, 255, 255, 255 }, j1Module* callback = nullptr);
+	Image* createImage(int x, int y, SDL_Texture* texture, j1Module* callback = nullptr);
+	Image* createImageFromAtlas(int x, int y, SDL_Rect section, j1Module* callback = nullptr);
 	//NULL texture to use atlas
-	UI_element* createButton(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick, j1Module* callback = nullptr);
+	Button* createButton(char* text, _TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnMouse, SDL_Rect OnClick, j1Module* callback = nullptr);
 	//NULL texture to use atlas
-	UI_element* createCheckBox(int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnClick, SDL_Rect Tick, j1Module* callback = nullptr);
+	Button* createCheckBox(int x, int y, SDL_Texture* texture, SDL_Rect standby, SDL_Rect OnClick, SDL_Rect Tick, j1Module* callback = nullptr);
 	//NULL texture to use atlas
-	UI_element* createInputText(_TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect section, j1Module* callback = nullptr);
+	InputBox* createInputBox(_TTF_Font* font, SDL_Color color, int x, int y, SDL_Texture* texture, SDL_Rect section, j1Module* callback = nullptr);
 
 private:
 
 	SDL_Texture* atlas;
 	p2SString atlas_file_name;
 	p2List<UI_element*> UI_elements;
-
-
 };
 
 #endif // __j1GUI_H__
