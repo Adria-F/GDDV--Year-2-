@@ -24,7 +24,9 @@ enum event_type
 	MOUSE_RIGHT_CLICK,
 	MOUSE_RIGHT_RELEASE,
 	MOUSE_LEFT_CLICK,
-	MOUSE_LEFT_RELEASE
+	MOUSE_LEFT_RELEASE,
+	FOCUS_RECEIVED,
+	FOCUS_LOST
 };
 
 // ---------------------------------------------------
@@ -56,6 +58,8 @@ public:
 
 	void DebugDraw();
 
+	void setFocus(UI_element* element);
+
 	// Gui creation functions
 	const SDL_Texture* GetAtlas() const;
 	Text* createText(char* text, int x, int y, _TTF_Font* font, SDL_Color color = { 255, 255, 255, 255 }, j1Module* callback = nullptr);
@@ -79,6 +83,7 @@ private:
 	p2SString atlas_file_name;
 	p2List<UI_element*> UI_elements;
 	UI_element* draggingElement = nullptr;
+	p2List_item<UI_element*>* focus = nullptr;
 };
 
 #endif // __j1GUI_H__

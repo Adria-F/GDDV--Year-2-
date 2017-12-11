@@ -23,7 +23,12 @@ void InputBox::readInput()
 		{
 			if (e.key.keysym.sym == SDLK_BACKSPACE && text->getLength() > 0)
 			{
-				//text->text.Cut(0, text->text.Length() - 1);
+				
+			}
+			if (e.key.keysym.sym == SDLK_ESCAPE)
+			{
+				reading = false;
+				App->gui->setFocus(nullptr);
 			}
 		}
 		else if (e.type == SDL_MOUSEBUTTONDOWN)

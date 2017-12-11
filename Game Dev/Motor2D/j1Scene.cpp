@@ -43,18 +43,18 @@ bool j1Scene::Start()
 	_TTF_Font* text_font = App->font->Load("fonts/wow/FRIZQUAD.ttf", 25);
 
 	App->gui->createImage(0, 0, App->tex->Load("textures/login_background.png")); //Background Image
-	window = App->gui->createWindow(50, 50, NULL, { 22, 532, 440, 470 }, this);
-	
-	Button* button = App->gui->createButton(100, 100, NULL, { 642,169,229,69 }, { 0,113,229,69 }, { 411,169,229,69 }, this);
-	button->appendChildAtCenter(App->gui->createText("Test Text", 0, 0, text_font, text_color, this));
-	button->dragable = true;	
+	window = App->gui->createWindow(50, 50, NULL, { 22, 532, 440, 470 });
 	
 	InputBox* box = App->gui->createInputBox("Your Name", text_font, text_color, 0, 0, NULL, { 490, 637, 343, 60 }, this);
 	box->dragable = true;
 
+	Button* button = App->gui->createButton(100, 100, NULL, { 642,169,229,69 }, { 0,113,229,69 }, { 411,169,229,69 }, this);
+	button->appendChildAtCenter(App->gui->createText("Test Text", 0, 0, text_font, text_color));
+	button->dragable = true;	
+	
 	window->appendChild(50, 100, box);
 	window->appendChildAtCenter(button);
-	text = App->gui->createText("Hello World", 120, 80, text_font, text_color, this);
+	text = App->gui->createText("Hello World", 120, 80, text_font, text_color);
 	window->appendChild(100, 20, text);
 
 	/*App->gui->createImageFromAtlas(10, 10, { 230, 19, 179, 80 }); //Wow Logo
@@ -141,6 +141,7 @@ bool j1Scene::OnUIEvent(UI_element* element, event_type event_type)
 	else if (event_type == MOUSE_LEFT_CLICK)
 	{
 		element->state = CLICKED;
+		App->gui->setFocus(element);
 		if (element == (UI_element*)text)
 		{
 			text->setText("Left click");
@@ -176,6 +177,24 @@ bool j1Scene::OnUIEvent(UI_element* element, event_type event_type)
 		if (element == (UI_element*)text)
 		{
 			text->setText("Hovering ");
+		}
+	}
+	else if (event_type == FOCUS_RECEIVED)
+	{
+		element->state = MOUSEOVER;
+		if (element->element_type == INPUTTEXT)
+		{
+			InputBox* inputBox = (InputBox*)element;
+			inputBox->reading = true;
+		}
+	}
+	else if (event_type == FOCUS_LOST)
+	{
+		element->state = STANDBY;
+		if (element->element_type == INPUTTEXT)
+		{
+			InputBox* inputBox = (InputBox*)element;
+			inputBox->reading = false;
 		}
 	}
 

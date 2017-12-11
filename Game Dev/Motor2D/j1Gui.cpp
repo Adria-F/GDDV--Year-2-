@@ -117,6 +117,51 @@ bool j1Gui::PreUpdate()
 				element->callback->OnUIEvent(element, MOUSE_RIGHT_RELEASE);
 		}
 	}
+	if (focus != nullptr)
+	{
+		element = focus->data;
+		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+			focus->data->callback->OnUIEvent(element, MOUSE_LEFT_CLICK);
+		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_UP)
+			focus->data->callback->OnUIEvent(element, MOUSE_LEFT_RELEASE);
+		if (App->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
+		{
+			focus = focus->next;
+			if (focus == nullptr)
+				focus = UI_elements.start;
+			while (focus->data->callback == nullptr)
+			{
+				focus = focus->next;
+				if (focus == nullptr)
+					focus = UI_elements.start;
+			}
+			if (focus->data != element)
+			{
+				element->callback->OnUIEvent(element, FOCUS_LOST);
+				focus->data->callback->OnUIEvent(focus->data, FOCUS_RECEIVED);
+			}
+		}
+		iPoint globalPos = focus->data->calculateAbsolutePosition();
+		if ((x < globalPos.x || x > globalPos.x + focus->data->section.w / scale || y < globalPos.y || y > globalPos.y + focus->data->section.h / scale))
+		{
+			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+			{
+				focus->data->callback->OnUIEvent(focus->data, FOCUS_LOST);
+				focus = nullptr;
+			}
+		}
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
+	{
+		focus = UI_elements.start;
+		while (focus->data->callback == nullptr)
+		{
+			focus = focus->next;
+			if (focus == nullptr)
+				focus = UI_elements.start;
+		}
+		focus->data->callback->OnUIEvent(focus->data, FOCUS_RECEIVED);
+	}
 	
 	return ret;
 }
@@ -155,10 +200,16 @@ bool j1Gui::PostUpdate()
 		{
 			SDL_StartTextInput();
 			inputBox->readInput();
+			/*if (!App->input->pauseInput)
+				App->input->pauseInput = true;*/
 			break;
 		}
 		else
+		{
 			SDL_StopTextInput();
+			/*if (App->input->pauseInput)
+				App->input->pauseInput = false;*/
+		}
 
 	}
 
@@ -174,6 +225,8 @@ bool j1Gui::CleanUp()
 	item = UI_elements.start;
 	while (item != NULL)
 	{
+		if (item == focus)
+			focus = nullptr;
 		RELEASE(item->data);
 		item = item->next;
 	}
@@ -191,9 +244,35 @@ void j1Gui::DebugDraw()
 		box.y = item->data->calculateAbsolutePosition().y;
 		box.w = item->data->section.w;
 		box.h = item->data->section.h;
-		App->render->DrawQuad(box, 255, 0, 0, 255, false);
+		if (item == focus)
+			App->render->DrawQuad(box, 255, 255, 0, 255, false);
+		else
+			App->render->DrawQuad(box, 255, 0, 0, 255, false);
 	}
 
+}
+
+void j1Gui::setFocus(UI_element * element)
+{
+	if (element == nullptr && focus != nullptr)
+	{
+		focus->data->callback->OnUIEvent(focus->data, FOCUS_LOST);
+		focus = nullptr;
+	}
+	else if (focus == nullptr || focus->data != element)
+	{
+		if (focus != nullptr && focus->data->callback != nullptr)
+		{
+			focus->data->callback->OnUIEvent(focus->data, FOCUS_LOST);
+		}
+		focus = UI_elements.At(UI_elements.find(element));
+		if (focus->data->callback != nullptr)
+		{
+			focus->data->callback->OnUIEvent(element, FOCUS_RECEIVED);
+		}
+	}
+	else
+		LOG("This element already has the focus!");
 }
 
 // const getter for atlas

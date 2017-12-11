@@ -24,7 +24,6 @@ public:
 public:
 
 	p2List<UI_element*> content;
-	p2List_item<UI_element*>* focus = nullptr;
 };
 
 #endif // !__UI_WINDOW__
